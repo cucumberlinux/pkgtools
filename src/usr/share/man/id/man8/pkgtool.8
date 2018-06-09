@@ -1,0 +1,74 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH PKGTOOL 8 "24 Nov 1995" "Slackware Versi 3.1.0" 
+.SH NAMA
+pkgtool \- perangkat perawatan paket software.
+.SH SINOPSIS
+\fBpkgtool\fP
+.LP
+\fBpkgtool\fP [ \fB\-\-sets #a#b#c#\fP ] [ \fB\-\-source_mounted\fP ] [
+\fB\-\-ignore_tagfiles\fP ] [ \fB\-\-tagfile filetag\fP ] [ \fB\-\-source_dir direktori\fP
+] [ \fB\-\-target_dir direktori\fP ] [ \fB\-\-source_device perangkat\fP ]
+.SH DESKRIPSI
+\fBpkgtool\fP adalah perangkat perawatan paket berbasis menu yang disediakan
+pada distribusi Slackware Linux. Perangkat ini mengijinkan pengguna untuk
+menginstall, menghapus, atau melihat paket software melalui sistem
+interaktif. Pkgtool juga bisa digunakan untuk menjalankan script berbasis
+menu yang umumnya dijalankan pada akhir installasi Slackware. Hal ini
+berguna untuk konfigurasi ulang (seperti mengubah jenis mouse).
+.SH OPSI
+Sebagian besar pengguna tidak akan menggunakan opsi ini ketika menjalankan
+\fBpkgtool.\fP Mereka biasanya digunakan ketika \fBpkgtool\fP dijalankan selama
+installasi sistem awal. Silahkan mencobanya, tetapi hati\-hati.
+.TP 
+\fB\-\-sets #A#B#C#\fP
+Menginstall set disk A, B, C. Memisahkan nama disk dengan simbol "#".
+.TP 
+\fB\-\-source_mounted\fP
+Ketika flag ini ada, \fBpkgtool\fP tidak akan mencoba melakukan unmount dan
+mount ulang perangkat sumber pada setiap disk.
+.TP 
+\fB\-\-ignore_tagfiles\fP
+Ketiga flag ini ada, \fBpkgtool\fP akan menginstall semua paket yang ditemukan
+tanpa memperdulikan file tag.
+.TP 
+\fB\-\-tagfile tagfile\fP
+Flag ini digunakan untuk menentukan dari perintah baris file tag yang harus
+digunakan untuk installasi.
+.TP 
+\fB\-\-source_dir direktori\fP
+Digunakan untuk menginstall banyak paket dari set disk. Ini merupakan
+direktori dimana sub direktori dari setiap disk ditemukan. Hal ini tidak
+digunakan ketika menginstall dari disket.
+.TP 
+\fB\-\-target_dir direktori\fP
+Direktori dimana direktori root target ditemukan. Ini merupakan '/' ketika
+menginstall pada hard drive, atau '/mnt' ketika menginstall dari disk
+installasi.
+.TP 
+\fB\-\-source_device perangkat\fP
+Perangkat sumber yang dipakai untuk installasi. Tidak digunakan jika Anda menyediakan flag⏎
+\fB\-\-source_mounted\fP⏎
+Biasa dipakai jika menginstall dari disket, seperti:⏎
+\-\-source_device /dev/fd0u1440⏎
+atau⏎
+\-\-source_device /dev/fd1h1200.⏎
+.SH PEMBUAT
+Patrick J. Volkerding <volkerdi@slackware.com>
+.SH "LIHAT JUGA"
+\fBmakepkg(8),\fP \fBexplodepkg(8),\fP \fBinstallpkg(8),\fP \fBremovepkg(8),\fP
+\fBupgradepkg(8)\fP

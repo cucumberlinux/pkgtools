@@ -1,0 +1,85 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH REMOVEPKG 8 "23 Kasım 2001" "Slackware Versiyon 8.1.0" 
+.SH İSİM
+removepkg \- Slackware paketlerini kaldır.
+.SH ÖZET
+\fBremovepkg\fP \fBpaketadı\fP
+.LP
+[ \fBROOT=/mnt\fP ] \fBremovepkg\fP [ \fB\-copy\fP ] [ \fB\-keep\fP ] [ \fB\-preserve\fP ] [
+\fB\-warn\fP ] \fBpaketadı\fP
+.SH AÇIKLAMA
+\fBremovepkg\fP standart çıktıya raporu yazarak daha önce kurulmuş bir
+Slackware paketini kaldırır. Bir paket tam paket ismi ile
+(/var/log/packages/ içinde listelenenler gibi), ya da temel paket ismi ile
+belirtilebilir. Örneğin, foo\-1.0\-i486\-1.tgz paketi şunlardan herhangi
+biriyle kaldırılabilir:
+
+removepkg foo\-1.0\-i486\-1.tgz (ayrıca tanınanlar: .tbz, .tlz, .txz)
+
+removepkg foo\-1.0\-i486\-1
+
+removepkg foo.tgz
+
+removepkg foo
+
+Dosyaları silerken, \fBremovepkg\fP sisteminizde kurulu paketin içeriğini
+analiz edecektir, ve sadece paket için eşsiz olan dosyaları
+silecektir. Benzer olarak, diğer tüm paketler için kurulum paketleri
+paketten sembolik bağlantıların silinip silinmeyeceğine karar verilirken
+gözönüne alınacaktır.
+.LP
+Bir paketi kaldırmak (kurmada olduğu gibi) tehlikeli bir girişim
+olabilir. Bu sebepten, kullanılan \fB\-warn\fP seçeneği vardır. Bunu
+kullandığınızda, \fBremovepkg\fP aslında herhangi bir dosyayı ya da bağlantıyı
+kaldırmayacaktır, fakat eğer gerçekten paketi kaldırırsanız neler
+olabileceğinin detaylı raporunu çıkarır. Önemli olabilecek herhangi bir şeyi
+yedeklediğinizden emin olmak için bir paketi kaldırmadan önce bunu yapmanız
+(ve belki \fBless\fP 'e çıktıyı boru ile göndermeniz) önerilir.
+.LP
+Bir paket kaldırıırken, onun orjinal dosya indisi /var/log/packages'den
+/var/log/removed_packages'e taşınacaktır. Benzer şekilde onun kurulum betiği
+/var/log/scripts'den /var/log/removed_scripts'e taşınacaktır.
+.SH OPSİYONLAR
+.TP 
+\fB\-warn paketadı\fP
+Hangi dosya ve dizinlerin kaldırılacak olduğu ile ilgili bir raporu standart
+çıktı birimine üretir, fakat paketi gerçekten kaldırmaz.
+.TP 
+\fB\-preserve paketadı\fP
+Eğer belirtilmişse, tüm paket alt ağacı
+/var/log/setup/tmp/preserved_packages/paketismi içinde yeniden oluşturulur.
+.TP 
+\fB\-copy paketadı\fP
+/var/log/setup/tmp/preserved_packages/paketismi altında paketin bir
+kopyasını oluşturur, fakat kaldırmaz. (\-warn \-preserve ile aynı etki)
+.TP 
+\fB\-keep\fP
+removepkg tarafından oluşturulan ara geçiş dosyalarını kaydet (delete_list,
+required_files, uniq_list, del_link_list, required_links,
+required_list). Çoğunlukla hata ayıklama amacı için kullanışlıdır.
+.SH " "
+Bir paketi / dışında \fBROOT\fP ortam değişkeni ile \fBremovepkg\fP sağlayarak
+dosya sisteminden kaldırmak mümkündür:
+.TP 
+\fBROOT=/mnt removepkg paket\fP
+
+.SH YAZARLAR
+Patrick J. Volkerding <volkerdi@slackware.com>,  Christian Franke
+<c.franke@acm.org> tarafından yapılan zenginleştirmeler ile
+.SH "BİR BAKIN"
+\fBinstallpkg(8),\fP \fBmakepkg(8),\fP \fBpkgtool(8),\fP \fBupgradepkg(8)\fP

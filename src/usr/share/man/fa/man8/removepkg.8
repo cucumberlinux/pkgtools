@@ -1,0 +1,84 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH REMOVEPKG 8 "۲۳ نوامبر ۲۰۰۱" "اسلکور نسخه 8.1.0" 
+.SH نام
+؛ removepkg: حذف کننده پکیج های اسلکور ؛
+.SH اختصار
+\fBremovepkg\fP \fBپکیج\fP
+.LP
+[ \fBROOT=/mnt\fP ] \fBremovepkg\fP [ \fB\-copy\fP ] [ \fB\-keep\fP ] [ \fB\-preserve\fP ] [
+\fB\-warn\fP ] \fBپکیج\fP
+.SH توصیف
+ابزار removepkg یک پکیج نصب شده اسکلور را در حالیکه گزارش پیشرفت را در خروجی
+استاندارد نمایش می دهد، حذف می کند. پکیج می تواند بوسیله نام کامل (به صورتی
+که در var/log/packages/ لیست شده) و یا نام مخفف مشخص شود. به عنوان مثال پکیج
+foo\-1.0\-i486\-1.tgz می تواند با هر کدام از فرمانهای زیر حذف شود:
+
+removepkg foo\-1.0\-i486\-1.tgz (tbz و tlz ،txz یا فرمتهای)
+
+removepkg foo\-1.0\-i486\-1
+
+removepkg foo.tgz
+
+removepkg foo
+
+هنگام حذف فایلها removepkg محتویات تمام پکیج های نصب شده روی سیستم را آنالیز
+کرده و تنها فایلهایی را حذف می کند که منحصر به پکیج در حال حذف هستند. به
+صورت مشابه اسکریپت های نصب تمام پکیج های دیگر هنگام تصمیم گیری در خصوص حذف
+یا عدم حذف لینک های سمبولیک از پکیج، مورد ملاحظه قرار می گیرند.
+.LP
+حذف یک پکیج (مانند نصب پکیج) ممکن است خطرانی در پی داشته باشد. به همین دلیل
+گزینه warn\- وجود دارد. هنگام استفاده از این گزینه removepkg واقعا فایل یا
+لینکی را حذف نخواهد کرد بلکه یک گزارش تفضیلی از اتفاقاتی که زمان حذف پکیج رخ
+می دهد ارائه می کند. پیشنهاد می شود که قبل از حذف پکیج از این گزینه استفاده
+کرده (و در صورت تمابل نسبت به pipe کردن خروجی به ابزار less اقدام کنید) تا
+از پشتیبان گیری از موارد مهم اطمینان حاصل نمائید.
+.LP
+به هنگام حذف یک پکیج، فایل ایندکس آن از مسیر var/log/packages/ به دایرکتوری
+var/log/removed_packages/ منتقل خواهد شد. همچنین، اسکریپت نصب آن از
+var/log/scripts/ به var/log/removed_scripts/ منتقل می شود.
+.SH "گزینه ها"
+.TP 
+\fB\-warn پکیج\fP
+گزارشی در خروجی استاندارد درباره فایلها و دایرکتوریهایی که در صورت حذف بکیج
+حذف خواهند شد تولید می کند، اما پکیج را حذف نمی کند.
+.TP 
+\fB\-preserve پکیج\fP
+با انتخاب این گزینه زیرشاخه کامل پکیج در این مسیر ساخته می شود:
+"پکیج/var/log/setup/tmp/preserved_packages/"
+.TP 
+\fB\-copy پکیج\fP
+در دایرکتوری "نام پکیج/var/log/setup/tmp/preserved_packages/" یک پکیج ایجاد
+می کند اما پکیج را حذف نمی کند (نظیر استفاده از گزینه ترکیبی warn
+\-preserve\-)
+.TP 
+\fB\-keep\fP
+
+فایلهای بینابینی زیر که بوسیله removepkg ساخته می شوند، ذخیره می کند (این
+عمل به ویژه برای فرایندهای عیب یابی مفید است): delete_list, required_files,
+uniq_list, del_link_list, required_links, required_list
+.SH " "
+حذف یک پکیج از فایل سیستمی غیر از / بوسیله تنظیم متغیر محیطی ROOT برای ابزار
+removepkg امکان پذیر است:
+.TP 
+\fBROOT=/mnt removepkg پکیج\fP
+
+.SH نویسندگان
+Patrick J. Volkerding <volkerdi@slackware.com>, با همکاری Christian
+Franke <c.franke@acm.org>
+.SH "نگاه کنید به"
+\fBinstallpkg(8),\fP \fBmakepkg(8),\fP \fBpkgtool(8),\fP \fBupgradepkg(8)\fP

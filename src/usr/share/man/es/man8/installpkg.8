@@ -1,0 +1,96 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH INSTALLPKG 8 "22 Nov 2001" "Slackware Versión 8.1.0" 
+.SH NOMBRE
+installpkg \- instalar paquetes de Slackware.
+.SH SINOPSIS
+\fBinstallpkg\fP [ \fB\-\-warn\fP ] [ \fB\-\-md5sum\fP ] [ \fB\-\-root /otraraíz\fP ] [
+\fB\-\-infobox\fP ] [ \fB\-\-menu\fP ] [ \fB\-\-terse\fP ] [ \fB\-\-ask\fP ] [ \fB\-\-priority
+ADD|REC|OPT|SKP\fP ] [ \fB\-\-tagfile /directorio/tagfile\fP ] \fBnombrepaquete\fP [
+\fBnombrepaquete2 ...\fP ]
+.SH DESCRIPCIÓN
+\fBinstallpkg\fP instala en su sistema uno o varios paquetes binarios *.tgz (o
+\&.tbz, .tlz, .txz) diseñados para ser usados con la distribución Slackware
+Linux.
+.SH OPCIONES
+.TP 
+\fB\-\-warn nombrepaquete\fP
+Genera a la salida estándar una lista de archivos que serían reemplazados,
+pero en realidad no instala el paquete. La lista es formateada de una manera
+apropiada para ser usada como una lista de archivos para respaldar.
+.TP 
+\fB\-\-md5sum nombrepaquete\fP
+Almacena el md5sum del paquete en los metadatos escritos en
+/var/log/packages.
+.TP 
+\fB\-\-root /otraraíz\fP
+Instalar usando una ubicación diferente de / (la estándar) como la raíz del
+sistema de archivos a instalar. En el ejemplo dado, se usa
+/otraraíz. Cambiar la variable de ambiente ROOT hace lo mismo.
+.TP 
+\fB\-\-infobox\fP
+Usar /bin/dialog para desplegar una caja de diálogo de información mientras
+se instala el paquete. Principalmente usado cuando installpkg es llamado
+desde otros scripts.
+.TP 
+\fB\-\-menu\fP
+Usar /bin/dialog para desplegar un menú para preguntar al usuario si desea
+instalar los paquetes o no. Generalmente usado cuando installpkg se llama
+desde otros scripts.
+.TP 
+\fB\-\-terse\fP
+Instalar el paquete mostrando solo una línea de descripción a la salida
+estándar.
+.TP 
+\fB\-\-ask\fP
+Usado con el modo \-\-menu. Cuando se selecciona, pregunta siempre si un
+paquete debe ser instalado sin tener en cuenta la prioridad que tenga el
+paquete.
+.TP 
+\fB\-\-priority ADD|REC|OPT|SKP\fP
+Cuando se instala con la opción \-\-menu, los niveles de prioridad de paquetes
+(que se encuentran en el archivo "tagfile" en el directorio de los paquetes)
+son usados para automáticamente instalar (ADD), saltarse (SKP) un paquete, o
+para sugerir al usuario un paquete recomendado (REC) u opcional (OPT) si se
+muestra un menú. Si se especifica una prioridad en la línea de comandos,
+esta será utilizada en lugar de los valores definidos en el tagfile para la
+lista completa de paquetes.
+.TP 
+\fB\-\-tagfile /directorio/tagfile\fP
+Especificar un archivo diferente para ser usado como prioridades de paquetes
+(en este ejemplo /directorio/tagfile será usado). El valor estándar es
+"tagfile" en el directorio de paquetes.
+.SH EJEMPLOS
+.TP 
+\fBInstalar un paquete de tipos de letra para X:\fP
+.P
+installpkg font\-bh\-ttf\-1.0.3\-noarch\-1.txz
+.P
+Tenga en cuenta que si un paquete ya está instalado, sería mejor usar
+upgradepkg(8).
+.TP 
+\fBCrear un respaldo de los archivos que serían reemplazados si el paquete es instalado:\fP
+.P
+.nf
+tar czvf /tmp/respaldo.tar.gz \e
+  $(installpkg \-\-warn font\-bh\-ttf\-1.0.3\-noarch\-1.txz)
+.fi
+.SH AUTOR
+Patrick J. Volkerding <volkerdi@slackware.com>
+.SH "VER TAMBIÉN"
+\fBmakepkg(8),\fP \fBremovepkg(8),\fP \fBexplodepkg(8),\fP \fBpkgtool(8),\fP
+\fBupgradepkg(8)\fP

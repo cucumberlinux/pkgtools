@@ -1,0 +1,36 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH EXPLODEPKG 8 "21 Mayıs 1994" "Slackware Versiyon 2.0.0" 
+.SH İSİM
+explodepkg \- tar + sıkıştırılmış paket içeriğini (Slackware yazılım paketi
+gibi) geçerli dizine aç.
+.SH ÖZET
+\fBexplodepkg\fP \fBpaket\fP \fB[\fP \fBpaket2,\fP \fBpaket3,\fP \fB...\fP \fB]\fP
+.SH AÇIKLAMA
+\fBexplodepkg\fP Slackware *.tgz (or .tbz, .tlz, .txz) paketlerini (veya
+desteklenen sıkıştırma araçlarından biriyle sıkıştırılmış tar dosyası
+tarafından üretilen herhangi bir dosyayı) aktif dizi içerisine açar ve
+çıkartır. ./install ya da ./var/log/setup içindeki kurulum betiklerini
+çalıtırmadığından genellikle paket kurulumu için kullanılmaz. \fBexplodepkg\fP
+için öncelikli kullanım paket bakımında \- aldizinde paketi oluşturma,
+düzeltmeler yapma ya da yazılımı güncelleme, ve sonra \fBmakepkg\fP ile paketi
+güncelleme içindir.
+.SH YAZAR
+Patrick J. Volkerding <volkerdi@slackware.com>
+.SH "BİR BAKIN"
+\fBtar(1),\fP \fBgzip(1),\fP \fBinstallpkg(8),\fP \fBmakepkg(8),\fP \fBpkgtool(8),\fP
+\fBupgradepkg(8)\fP

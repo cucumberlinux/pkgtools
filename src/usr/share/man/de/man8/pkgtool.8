@@ -1,0 +1,78 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH PKGTOOL 8 "24 November 1995" "Slackware Version 3.1.0" 
+.SH NAME
+pkgtool \- Paket\-Verwaltungs\-Software
+.SH ZUSAMMENFASSUNG
+\fBpkgtool\fP
+.LP
+\fBpkgtool\fP [ \fB\-\-sets #a#b#c#\fP ] [ \fB\-\-source_mounted\fP ] [
+\fB\-\-ignore_tagfiles\fP ] [ \fB\-\-tagfile tagfile\fP ] [ \fB\-\-source_dir directory\fP
+] [ \fB\-\-target_dir directory\fP ] [ \fB\-\-source_device device\fP ]
+.SH BESCHREIBUNG
+\fBpkgtool\fP ist ein menügesteuertes Paket\-Verwaltungs\-Werkzeug, welches durch
+die Slackware\-Distribution bereitgestellt wird. Es erlaubt dem Benutzer,
+Software Pakete zu installieren, zu entfernen oder durch ein interaktives
+System anzuschauen. Pkgtool kann außerdem dazu genutzt werden, um die
+menügesteuerten Skripte, die normalerweise am Ende einer
+Slackware\-Installation ausgeführt werden, erneut auszuführen. Dies ist für
+eine einfache Neukonfiguration nützlich (wie z.B. das Ändern des Maus\-Typs).
+.SH OPTIONEN
+Die meisten Benutzer wollen keine Optionen nutzen, wenn sie \fBpkgtool\fP
+ausführen. Diese werden generell nur genutzt, wenn \fBpkgtool\fP bei der
+Erstinstallation ausgeführt wird. Sie können sie gerne ausprobieren, aber
+seien Sie vorsichtig.
+.TP 
+\fB\-\-sets #A#B#C#\fP
+Installiere die Disk\-Sets A, B, C. Trenne die Namen der Disk\-Sets durch "#"
+Symbole.
+.TP 
+\fB\-\-source_mounted\fP
+Wenn diese Markierung gesetzt ist, wird \fBpkgtool\fP nicht versuchen, das
+Quelllaufwerk bei jeder Disk neu aus\- und wieder einzuhängen.
+.TP 
+\fB\-\-ignore_tagfiles\fP
+Wenn diese Markierung gesetzt ist, wird \fBpkgtool\fP jedes Paket installieren,
+unabhängig von den Tagfiles.
+.TP 
+\fB\-\-tagfile tagfile\fP
+Diese Markierung wird von der Kommandozeile genutzt, um zu spezifizieren,
+welche Tagfiles für die Installation genutzt werden sollen.
+.TP 
+\fB\-\-source_dir Verzeichnis\fP
+Wird genutzt, wenn verschiedene Pakete von Disk\-Sets installiert
+werden. Dies ist das Verzeichnis, in welchen die Unterverzeichnisse für
+jedes Laufwerk zu finden sind. Diese werden nicht genutzt, wenn von einer
+Diskette installiert wird.
+.TP 
+\fB\-\-target_dir Verzeichnis\fP
+Das Verzeichnis, in dem sich das Hauptverzeichnis der Ziels befindet. Dieses
+ist '/', wenn auf einer Festplatte installiert wird oder typischerweise
+\&'/mnt', wenn von einer Installations\-Disk installiert wird.
+.TP 
+\fB\-\-source_device Gerät\fP
+Das Quellengerät, von dem installiert werden soll. Dies wird nicht verwendet, wenn Sie den Parameter
+\fB\-\-source_mounted\fP
+angegeben haben. Es wird normalerweise verwendet, wenn von einer Diskette installiert wird, beispielsweise:
+ \-\-source_device /dev/fd0u1440
+oder
+ \-\-source_device /dev/fd1h1200.
+.SH AUTOR
+Patrick J. Volkerding <volkerdi@slackware.com>
+.SH "SIEHE AUCH"
+\fBmakepkg(8),\fP \fBexplodepkg(8),\fP \fBinstallpkg(8),\fP \fBremovepkg(8),\fP
+\fBupgradepkg(8)\fP

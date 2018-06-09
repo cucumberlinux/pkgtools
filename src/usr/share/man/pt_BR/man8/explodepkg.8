@@ -1,0 +1,36 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH EXPLODEPKG 8 "21 de Maio de 1994" "Slackware Versão 2.0.0" 
+.SH NOME
+explodepkg \- Extrai o conteúdo de um pacote tar+compressão (como um pacote
+de software do Slackware) no diretório atual.
+.SH SINOPSE
+\fBexplodepkg\fP \fBpacote\fP \fB[\fP \fBpacote2,\fP \fBpacote3,\fP \fB...\fP \fB]\fP
+.SH DESCRIÇÃO
+\fBexplodepkg\fP descomprime e extrai pacotes *.tgz (ou .tbz, .tlz, .txz) do
+Slackware (ou qualquer arquivo que foi criado comprimindo um arquivo tar com
+um dos utilitários de compressão suportados) no diretório atual. Geralmente
+não é utilizado para instalar pacotes, já que ele não executa os scripts de
+instalação em ./install ou ./var/log/setup. A utilização principal do
+\fBexplodepkg\fP é para fazer manutenção de pacote \- explodindo um pacote num
+subdiretório, aplicando correções nele ou atualizando programas, para então
+montar o pacote atualizado com o \fBmakepkg.\fP
+.SH AUTOR
+Patrick J. Volkerding <volkerdi@slackware.com>
+.SH "VER TAMBÉM"
+\fBtar(1),\fP \fBgzip(1),\fP \fBinstallpkg(8),\fP \fBmakepkg(8),\fP \fBpkgtool(8),\fP
+\fBupgradepkg(8)\fP

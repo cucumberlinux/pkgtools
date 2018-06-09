@@ -1,0 +1,74 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH PKGTOOL 8 "24 Nov 1995" "Slackware Wersja 3.1.0" 
+.SH NAZWA
+pkgtool \- narzędzie do zarządzania pakietami
+.SH STRESZCZENIE
+\fBpkgtool\fP
+.LP
+\fBpkgtool\fP [ \fB\-\-sets #a#b#c#\fP ] [ \fB\-\-source_mounted\fP ] [
+\fB\-\-ignore_tagfiles\fP ] [ \fB\-\-tagfile tagfile\fP ] [ \fB\-\-source_dir directory\fP
+] [ \fB\-\-target_dir directory\fP ] [ \fB\-\-source_device device\fP ]
+.SH OPIS
+\fBpkgtool\fP jest opartym na menu narzędziem do zarządzania pakietami, które
+jest częścią dystrybucji Slackware Linux. Pozwala użytkownikowi na
+instalację, usunięcie oraz przeglądanie pakietów programów przez
+interaktywny system. Pkgtool może również być użyte do uruchomienia ponownie
+skryptów zwykle uruchamianych pod koniec instalacji Slackware. Przydatne
+jest przy podstawowej rekonfiguracji (np. zmiana typu myszy).
+.SH OPCJE
+Większość użytkowników nie będzie chciała używać żadnych opcji uruchamiając
+\fBpkgtool\fP. Są one zwykle używane wyłącznie gdy \fBpkgtool\fP jest uruchamiany
+podczas oryginalnej instalacji systemu. Możesz ich używać, ale bądź uważny.
+.TP 
+\fB\-\-sets #A#B#C#\fP
+Instaluj dyski serii A, B, C. Oddziel nazwy serii symbolami '#'.
+.TP 
+\fB\-\-source_mounted\fP
+Przy tej opcji, \fBpkgtool\fP nie będzie próbowało odmontować i zamontować na
+nowo urządzenia źródłowego przy każdym dysku.
+.TP 
+\fB\-\-ignore_tagfiles\fP
+Przy tej opcji, \fBpkgtool\fP zainstaluje każdy napotkany pakiet ignorując
+pliki "tagfile".
+.TP 
+\fB\-\-tagfile tagfile\fP
+Opcja ta używana jest z linii komend w celu podania, który plik "tagfile"
+powinien być użyty do instalacji.
+.TP 
+\fB\-\-source_dir directory\fP
+Używane przy instalacji wielu pakietów z zestawu dysków. Jest to katalog, w
+którym znajdują się podkatalogi dla każdego dysku. Nie jest to używane przy
+instalacji z dyskietek.
+.TP 
+\fB\-\-target_dir directory\fP
+Katalog, gdzie znajduje się docelowy katalog root. Instalując na twardym
+dysku jest to '/', lub najczęściej '/mnt' instalując z dysku instalacyjnego.
+.TP 
+\fB\-\-source_device device\fP
+Urządzenie źródłowe, z którego instalujemy. Nie jest używane jeśli podałeś
+opcję
+\fB\-\-source_mounted\fP
+Zwykle używane instalując z dyskietek, np:
+\-\-source_device /dev/fd0u1440
+lub
+\-\-source_device /dev/fd1h1200
+.SH AUTOR
+Patrick J. Volkerding <volkerdi@slackware.com>
+.SH "ZOBACZ RÓWNIEŻ"
+\fBmakepkg(8),\fP \fBexplodepkg(8),\fP \fBinstallpkg(8),\fP \fBremovepkg(8),\fP
+\fBupgradepkg(8)\fP

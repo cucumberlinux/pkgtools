@@ -1,0 +1,35 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH EXPLODEPKG 8 "۲۱ می ۱۹۹۴" "اسلکور نسخه ۲.۰.۰" 
+.SH نام
+؛ explodepkg: استخراج کننده محتویات یک پکیج مبتنی بر tar (نظیر یک پکیج نرم
+افزاری اسلکور) در دایرکتوری فعلی ؛
+.SH اختصار
+\fBexplodepkg\fP \fBpackage\fP \fB[\fP \fBpackage2,\fP \fBpackage3,\fP \fB...\fP \fB]\fP
+.SH توصیف
+ابزار explodepkg پکیج های اسلکور با فرمتهای tgz ،tbz ،tlz و txz یا هر پکیج
+دیگری که از فشرده سازی یک فایل tar با ابزارهای استاندارد بدست آمده باشد، در
+دایرکتوری فعلی استخراج می کند. این فرمان معمولا برای نصب پکیج استفاده نمی
+شود چون قادر به اجرای اسکریپت های نصب موجود در install/. یا در
+var/log/setup/. نیست. استفاده اصلی این ابزار در مدیریت پکیج ها به معنی
+استخراج بک پکیج در یک زیردایرکتوری، تعمیر یا ارتقاء آن و سپس  ساخت پکیج
+ارتقاء یافته با استفاده از ابزار makepkg می باشد.
+.SH نویسنده
+Patrick J. Volkerding <volkerdi@slackware.com>
+.SH "نگاه کنید به"
+\fBtar(1),\fP \fBgzip(1),\fP \fBinstallpkg(8),\fP \fBmakepkg(8),\fP \fBpkgtool(8),\fP
+\fBupgradepkg(8)\fP

@@ -1,0 +1,73 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH UPGRADEPKG 8 "31 Mei 2002" "Slackware Versie 8.1.0" 
+.SH NAAM
+upgradepkg \- Upgrade Slackware pakketten.
+.SH SYNOPSIS
+\fBupgradepkg\fP [ \fB\-\-dry\-run\fP ] [ \fB\-\-install\-new\fP ] [ \fB\-\-reinstall\fP ] [
+\fB\-\-verbose\fP ] \fBnieuwepakketnaam\fP \fB[\fP\fInieuwepakketnaam2\fP\fB]\fP
+.LP
+\fBupgradepkg\fP [ \fB\-\-dry\-run\fP ] [ \fB\-\-install\-new\fP ] [ \fB\-\-reinstall\fP ] [
+\fB\-\-verbose\fP ] \fBoudepakketnaam%nieuwepakketnaam\fP \fB[\fP\fIoud2%nieuw2\fP\fB]\fP
+.SH BESCHRIJVING
+\fBupgradepkg\fP waardeert een Slackwarepakket op van een oude naar een nieuwe
+versie. Het doet dit door het nieuwe pakket op het systeem te \fBINSTALLEREN\fP
+en daarna alle bestanden van het oude pakket die niet in het nieuwe
+voorkomen te \fBVERWIJDEREN.\fP Als het oude en het nieuwe pakket dezelfde naam
+hebben voldoet een enkel argument. Als de pakketten een verschillende naam
+hebben geef dan de naam van het oude pakket gevolgd door het % symbool,
+daarna de naam van het nieuwe pakket. Laat geen spaties tussen de oude en
+nieuwe pakketnaam.
+
+Als upgradepkg meerdere geïnstalleerde pakketten vindt met dezelfde oude
+pakketnaam zal het deze allemaal verwijderen.
+.TP 
+Om op te waarderen in een andere directory dan / (zoals /mnt):
+.TP 
+ROOT=/mnt upgradepkg pakket.tgz (of .tbz, .tlz, .txz)
+.SH OPTIES
+.TP 
+\fB\-\-dry\-run\fP
+Produceer een rapport over welke pakketten zouden worden geïnstalleerd of
+opgewaardeerd, maar doe dit niet daadwerkelijk.
+.TP 
+\fB\-\-install\-new\fP
+Normaal waardeert upgradepkg alleen pakketten op die reeds op het systeem
+zijn geïnstalleerd en slaat alle pakketten over waar geen versie van is
+geïnstalleerd. Als \fB\-\-install\-new\fP is gespecificeerd worden in aanvulling
+op het opwaarderen van bestaande pakketten ook nieuwe pakketten
+geïnstalleerd.
+.TP 
+\fB\-\-reinstall\fP
+Upgradepkg slaat normaal pakketten over als het exact gelijke pakket
+(dezelfde naam, versie, arch, en build\-nummer) al op het systeem is
+geïnstalleerd. Gebruik de \-\-reinstall optie als je alle pakketten wilt
+opwaarderen zelfs als dezelfde versie reeds is geïnstalleerd.
+.TP 
+\fB\-\-verbose\fP
+Laat alle smerige details zien van de opwaardering.
+.SH FOUTEN
+Sla voor het opwaarderen van een pakket alle configuratiebestanden (zoals in
+/etc) op die je wilt bewaren. Soms worden deze onveranderd gelaten, maar dat
+hangt af van de pakketstructuur. Als je wilt forceren dat nieuwe versies van
+deze bestanden worden geïnstalleerd, verwijder de oude dan handmatig voor
+het uitvoeren van upgradepkg.
+.SH AUTEUR
+Patrick J. Volkerding <volkerdi@slackware.com>
+.SH "ZIE OOK"
+\fBmakepkg(8),\fP \fBinstallpkg(8),\fP \fBremovepkg(8),\fP \fBexplodepkg(8),\fP
+\fBpkgtool(8)\fP

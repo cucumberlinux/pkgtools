@@ -1,0 +1,102 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MAKEPKG 8 "21 Mei 1994" "Slackware Versie 2.0.0" 
+.SH NAAM
+makepkg \- Maak Slackware pakketten.
+.SH SYNOPSIS
+\fBmakepkg\fP [ \fB\-l, \-\-linkadd y|n\fP ] [ \fB\-c, \-\-chown y|n\fP ] \fBpakketnaam\fP
+.SH BESCHRIJVING
+\fBmakepkg\fP maakt een nieuw Slackware compatibel pakket. Het pakket wordt
+gemaakt door gebruik te maken van de inhoud van de huidige directory en alle
+subdirectories. Symbolische links worden omgezet naar script\-code om weer
+opnieuw gemaakt te worden wanneer het pakket wordt geïnstalleerd. Deze code
+wordt toegevoegd aan het primaire installatiescript \fB(install/doinst.sh
+)\fP. Als dat script niet bestaat wordt dit aangemaakt met deze inhoud. Het
+pakket zal worden geschreven naar het bestand \fBpakketnaam\fP wat de volledige
+naam moet zijn inclusief de extensie. Deze is meestal .tgz, maar .tbz, .tlz,
+en .txz zijn ook mogelijk. De juiste compressietool (gzip, bzip2, lzma, of
+xz) moet ook op de machine zijn geïnstalleerd.
+.SH OPTIES
+.TP 
+\fB\-l, \-\-linkadd y|n\fP
+Indien y, voeg alle gevonden symbolische links toe aan het installatiescript
+(doinst.sh) en verwijder ze. Dit is de aanbevolen actie. Zonder deze optie
+zal makepkg vragen wat te doen als symbolische links worden gevonden.
+.TP 
+\fB\-p, \-\-prepend\fP
+Bij deze optie zal elke symbolische link die wordt toegevoegd aan doinst.sh
+vooraan het bestaande script worden bijgezet. Dit is nuttig voor pakketten
+die gedeelde libraries bevatten die als eerste gelinkt moeten worden omdat
+programma's die later in het doinst.sh script nodig hebben.
+.TP 
+\fB\-c, \-\-chown y|n\fP
+Indien y, zal makepkg alle directory\-permissies naar 755 en eigendom naar
+root:root terug zetten. In het algemeen zul je permissies en eigendommen
+voor jezelf al vastgesteld moeten hebben, dus vertrouwen op deze optie is
+nogal slordig. Standaard instelling is 'n'. Als deze optie niet wordt
+opgegeven zal makepkg erom vragen.
+.SH INSTALLATIESCRIPTS
+Er worden 3 soorten installatiescripts ondersteund door het Slackware
+pakkettensysteem.
+.TP 
+Het eerste is het
+\fBprimaire\fP installatiescript. Dit bevindt zich in de subdirectory
+\&\fB./install\fP en moet \fBdoinst.sh\fP heten om als zodanig herkend te
+worden. Dit (en andere installatiescripts) moet geschreven zijn met de basis
+Bourne shell syntaxis zoals herkend door de \fBash\fP shell omdat dit de shell
+is die wordt gebruikt om het script uit te voeren vanaf een Slackware
+installatiediskette. Een veel gemaakte fout is het gebruik van \fBbash\fP
+syntax\-extensies, omdat het script correct werkt wanneer het wordt
+uitgevoerd vanaf harddisk maar zal falen vanaf diskette. Als het pakket voor
+eigen gebruik is maakt dat niet uit maar wees voorzichtig wanneer je het
+pakket wilt delen met anderen. Het \fBprimaire installatiescript\fP wordt
+uitgevoerd direct nadat het pakket is geïnstalleerd met \fBinstallpkg,
+pkgtool,\fP of \fBsetup.\fP
+.TP 
+Het tweede soort script is het
+\fBconfiguratie\fP script. Dit bevindt zich in subdirectory \fB./var/log/setup\fP
+en de naam hiervan moet beginnen met \fBsetup.\fP om als zodanig te worden
+herkend. Een voorbeeld is het tijdzone\-script:
+\fB/var/log/setup/setup.timeconfig.\fP Deze scripts worden uitgevoerd tijdens
+de \fBCONFIGURE\fP fase van \fBsetup,\fP en vanaf dan iedere keer dat de gebruiker
+de \fBCONFIGURE\fP optie van \fBsetup\fP uitvoert. Typisch zal de gebruiker deze
+fase van setup doorlopen nadat alle pakketten zijn geïnstalleerd. Alles wat
+interactief moet zijn gaat in een van deze scripts om het stoppen van
+pakketteninstallatie tijdens \fBsetup\fP te voorkomen.
+.TP 
+Het derde soort script is het
+\fBonlyonce\fP script. Zoals de naam al suggereert worden deze slechts één keer
+uitgevoerd nadat het pakket is geïnstalleerd, in tegenstelling tot het
+standaard \fBconfiguratie\fP script. Deze scripts bevinden zich ook in de
+\&\fB./var/log/setup\fP directory. Hun naam moet beginnen met \fBsetup.,\fP maar
+moet ook de string \fBonlyonce\fP bevatten. Een voorbeeld zou een script kunnen
+zijn met de naam \fB/var/log/setup/setup.onlyonce.testscript\fP
+.SH PAKKETFORMAAT
+\fBmakepkg\fP gebruikt GNU tar plus GNU gzip om zijn pakketten te maken. Een
+eenvoudige manier om een pakket uit te pakken (zonder het installatiescript
+uit te voeren natuurlijk) is met een commando zoals:
+.TP 
+explodepkg pakket.tgz
+.TP 
+Of met zoiets als:
+.TP 
+gzip \-dc pakket.tgz | tar xvvf \-
+.SH AUTEUR
+Patrick J. Volkerding <volkerdi@slackware.com>
+.SH "ZIE OOK"
+\fBinstallpkg(8),\fP \fBexplodepkg(8),\fP \fBremovepkg(8),\fP \fBpkgtool(8),\fP
+\fBupgradepkg(8)\fP

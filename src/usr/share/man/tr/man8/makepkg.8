@@ -1,0 +1,98 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MAKEPKG 8 "21 Mayıs 1994" "Slackware Versiyon 2.0.0" 
+.SH İSİM
+makepkg \- Slackware paketleri yap.
+.SH ÖZET
+\fBmakepkg\fP [ \fB\-l, \-\-linkadd y|n\fP ] [ \fB\-c, \-\-chown y|n\fP ] \fBpaketadı\fP
+.SH AÇIKLAMA
+\fBmakepkg\fP yeni bir Slackware uyumlu paket oluşturur. Paket aktif dizin ve
+tüm altdizinlerin içeriği kullanılarak inşa edilir. Eğer sembolik
+bağlantılar varsa, bunlar paket kurulurken yeniden oluşturulması için betiğe
+dönüştürülür. Bu kod birincil kurulum betiğine \fB( install/doinst.sh )\fP
+eklenir, ya da, bu betik yoksa bu o içeriklerle oluşturulacaktır. Paket
+uzantı dahil tam isim olması gereken \fBpackagename\fP dosyasına
+yazılacaktır. Bu genellikle .tgz'dir, fakat, .tbz, .tlz, ve .txz de kabul
+edilir. Uygun sıkıştırma araçları (gzip, bzip2, lzma, ya da xz) makinada
+kurulu olmalıdır.
+.SH OPSİYONLAR
+.TP 
+\fB\-l, \-\-linkadd y|n\fP
+Eğer y ise, kurulum betiği (doint.sh) içinde bulunan herhangi bir sembolik
+linki ekler ve onları siler. Bu tavsiye edilen işlemdir. Eğer bu seçenek
+kullanılmazsa, makepkg sembolik linkler bulunup bulunmadığını bildirir.
+.TP 
+\fB\-p, \-\-prepend\fP
+Eğer bu seçenek verilmişse, ozaman doint.sh'a eklenen herhangi bir sembolik
+link varolan betiğe eklenir. Bu, ilk önce bağlanması gereken paylaşılan
+kütüphaneleri kullanan paketler için kullanışlıdır, çünkü programlar onları
+sonra doint.sh içinde kullanırlar.
+.TP 
+\fB\-c, \-\-chown y|n\fP
+Eğer y ise, makepkg tüm dizin izinlerini 755'e ve sahipliklerini root:root
+şeklinde sıfırlayacaktır. Genelde, kendiniz için çalışan izinlere ve
+sahipliğe sahip olmalısınız, yani bu seçeneği y yapmaya güvenmek biraz
+paspallık.
+.SH "KURULUM BETİKLERİ"
+Slackware paket sisteminde desteklenen 3 tip kurulum betiği desteği vardır.
+.TP 
+Birinci tür
+\fBprimary\fP birincil kurulum betiği. Bu \fB./install\fP aldizininde bulunur ve
+tanınması için \fBdoinst.sh\fP isminde olmalıdır. Bu (ve dğer kurulum
+betikleri), Slackware kurulum disketi ile kurulum yaparken kullanılacak
+kabuk olduğundan, \fBash\fP kabuğu tarafından tanınan temel Bourne kabuk
+sözdizimi kullanılarak yazılmış olmalıdır. Bu çok bilinen bir tuzaktır \-
+\fBbash\fP sözdizimi genişletmelerini kullanımının farkında olun, çünkü betik
+sabit sürücüden kurulurken iyi çalışacaktır, fakat floppy kurulumunda
+patlayabilir. Eğer paket kişisel kullanım içinse bu bir problem
+değildir. Yine de eğer paketinizi diğerlerile paylaşmayı planlıyorsanız
+dikkatli olun. \fBprimary installation script\fP paket \fBinstallpkg, pkgtool,\fP
+ya da \fBsetup\fP ile kurulur kurulmaz çalıştırılır.
+.TP 
+Senaryonun ikinci türü
+\fBconfiguration\fP betiği. \fB./var/log/setup\fP altdizini altında bulunur ve
+tanınması için \fBsetup\fP ile başlayan bir ismi olmalıdır. zamandilimi betiği
+buna bir örnektir: \fB/var/log/setup/setup.timeconfig.\fP Bu betikler
+\fBsetup,\fP'ın \fBCONFIGURE\fP aşaması sırasında çalıştırılır ve kullanıcı
+\fBsetup\fP'dan \fBCONFIGURE\fP seçeneğini her çalıştırdığında yeniden
+çalıtırılır. Alışılmış biçimde, kullanıcı tüm paketlerin kurulumu sonrası
+kurulumun bu aşaması üzerinden gidecektir. Etkileşimli olması gereken
+herhangi birşey \fBsetup\fP sırasında paket kurulumu sürecinin durmasından
+kaçınmak için bu betiklerden birinin içine girmelidir.
+.TP 
+Betiğin üçüncü türü
+\fBonlyonce\fP betiği. İsmin önerdiği gibi, bunlar, standard \fBconfiguration\fP
+betiğinden farklı olarak,  paket kurulduktan sonra sadece bir kez
+çalıştırılır. Bu betikler ayrıca \fB./var/log/setup\fP içinde bulunur ve
+\fBsetup.,\fP ile başlayan bir isimleri olmalıdır fakat isme ek olarak
+\fBonlyonce\fP dizisini içermelidirler. Bir betik ismi ile örnek
+\fB/var/log/setup/setup.onlyonce.testscript\fP olabilir
+.SH "PAKET FORMATI"
+\fBmakepkg\fP paketini oluşturmak için GNU tar artı GNU gzip kullanır. Paketin
+içeriğini açmak için basit bir yol (kurulum betiğini çalıştırmadan tabii ki)
+şunun gibi bir komut kullanmaktır:
+.TP 
+explodepkg paket.tgz
+.TP 
+Veya böyle birşey:
+.TP 
+gzip \-dc paket.tgz | tar xvvf \-
+.SH YAZAR
+Patrick J. Volkerding <volkerdi@slackware.com>
+.SH "BİR BAKIN"
+\fBinstallpkg(8),\fP \fBexplodepkg(8),\fP \fBremovepkg(8),\fP \fBpkgtool(8),\fP
+\fBupgradepkg(8)\fP

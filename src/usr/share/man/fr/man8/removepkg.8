@@ -1,0 +1,88 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH REMOVEPKG 8 "23 Nov 2001" "Slackware Version 8.1.0" 
+.SH NOM
+removepkg \- enlève des paquets Slackware.
+.SH SYNOPSIS
+\fBremovepkg\fP \fBnomdepaquet\fP
+.LP
+[ \fBROOT=/mnt\fP ] \fBremovepkg\fP [ \fB\-copy\fP ] [ \fB\-keep\fP ] [ \fB\-preserve\fP ] [
+\fB\-warn\fP ] \fBnomdepaquet\fP
+.SH DESCRIPTION
+\fBremovepkg\fP enlève un paquet précédemment installé, tout en produisant un
+rapport d'avancement sur la sortie standard. Un paquet peut être spécifié
+par le nom de fichier en entier (tel que listé dans /var/log/packages/), ou
+par la base du nom de paquet. Par exemple, le fichier foo\-1.0\-i486\-1.tgz
+pourrait être supprimé par l'une ou l'autre des commandes suivante :
+
+removepkg foo\-1.0\-i486\-1.tgz (les extensions .tbz, .tlz, .txz sont aussi
+reconnues)
+
+removepkg foo\-1.0\-i486\-1
+
+removepkg foo.tgz
+
+removepkg foo
+
+Avant de supprimer des fichiers, \fBremovepkg\fP analyse le contenu des autres
+paquets installés sur votre système, et supprimera seulement ceux qui ne se
+trouvent que dans le paquet à enlever. De même, les scripts d'installation
+de tous les autres paquets seront examinés avant de décider de supprimer ou
+non les liens symboliques du paquet.
+.LP
+Enlever un paquet (de même qu'en installer un) peut être une entreprise
+dangereuse. C'est pour cela que l'option \fB\-warn\fP est disponible. Quand vous
+l'utilisez, \fBremovepkg\fP ne supprime effectivement aucun fichier ou lien,
+mais produit un rapport détaillé de ce qu'il ferait si vous enleviez
+effectivement le paquet. Il vous est suggéré d'utiliser cette option (et
+peut\-être de transférer le résultat vers \fBless\fP) avant d'enlever des
+paquets pour vous assurer d'avoir sauvegardé tout ce qui pourrait être
+important.
+.LP
+Quand vous enlevez un paquet, son fichier d'index est déplacé de
+/var/log/packages à /var/log/removed_packages. De même son script
+d'installation est déplacé de /var/log/scripts à /var/log/removed_scripts.
+.SH OPTIONS
+.TP 
+\fB\-warn nomdepaquet\fP
+Affiche sur la sortie standard un rapport indiquant quels fichiers et
+répertoires seraient supprimés, mais n'enlève pas réellement le paquet.
+.TP 
+\fB\-preserve nomdepaquet\fP
+Si cette option est utilisée, l'arborescence complète du paquet sera
+reconstruite dans /var/log/setup/tmp/preserved_packages/nomdupaquet.
+.TP 
+\fB\-copy nomdepaquet\fP
+Construit une copie du paquet sous le
+nom/var/log/setup/tmp/preserved_packages/packagename, mais ne le supprime
+pas (même effet que \-warn \-preserve)
+.TP 
+\fB\-keep\fP
+Sauvegarde les fichiers intermédiaires créés par removepkg (delete_list,
+required_files, uniq_list, del_link_list, required_links, required_list).
+Surtout utiles aux fins de déverminage.
+.SH " "
+Il est possible de supprimer un paquet d'un système de fichiers autre que /
+en fournissant à \fBremovepkg\fP une variable d'environnement \fBROOT\fP :
+.TP 
+\fBROOT=/mnt removepkg nomdepaquet\fP
+
+.SH AUTEURS
+Patrick J. Volkerding <volkerdi@slackware.com>, avec améliorations
+par Christian Franke <c.franke@acm.org>
+.SH "VOIR AUSSI"
+\fBinstallpkg(8),\fP \fBmakepkg(8),\fP \fBpkgtool(8),\fP \fBupgradepkg(8)\fP

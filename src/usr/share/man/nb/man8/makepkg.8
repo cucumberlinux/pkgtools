@@ -1,0 +1,101 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MAKEPKG 8 "21 Mai 1994" "Slackware Versjon 2.0.0" 
+.SH NAVN
+makepkg \- lag Slackware pakker.
+.SH SAMMENDRAG
+\fBmakepkg\fP [ \fB\-l, \-\-linkadd y|n\fP ] [ \fB\-c, \-\-chown y|n\fP ] \fBpakkenavn\fP
+.SH BESKRIVELSE
+\fBmakepkg\fP lager en ny Slackware kompatibel pakke. Pakken lages med
+innholdet i den nåværende filkatalogen og alle dets undermapper. Hvis
+symbolske lenker ligger her vil de bli konvertert til skript kode som
+gjenskaper dem når pakken installeres. Denne koden legges til i hoved
+installasjons skriptet \fB( install/doinst.sh )\fP, eller hvis dette skriptet
+ikke eksisterer, vil det bli opprettet med disse instruksene. Pakken vil
+lagres som filen \fBpakkenavn\fP, som bør være et komplett filnavn inkludert
+filendelse. Filendelsen er vanligvis .tgz men .tbz, .tlz og .txz er også
+tillatt. PS! Komprimeringsverktøyet som benyttes (gzip, bzip2, lzma eller
+xz) må være installert på maskinen.
+.SH VALGMULIGHETER
+.TP 
+\fB\-l, \-\-linkadd y|n\fP
+Hvis 'y', legg til symbolske lenker i installasjons skriptet (doinst.sh) og
+slett deretter filene. Dette er den anbefalte fremgangsmåten. Uten dette vil
+makepkg spørre brukeren om instrukser når det kommer over symbolske lenker.
+.TP 
+\fB\-p, \-\-prepend\fP
+Med dette valget vil symbolske lenker bli lagt til i starten av doinst.sh
+skriptet. Dette er nyttig for pakker som inneholder delte biblioteker som
+trenger å linkes tidlig i installasjons skriptet fordi progammer trenger dem
+senere under installasjonen.
+.TP 
+\fB\-c, \-\-chown y|n\fP
+Hvis 'y', vil makepkg resette alle filkataloger med tilgangsrettighetene
+"755" og eierskap "root:root". Generelt sett bør du sortere ut disse
+tilgangsrettighetene manuelt, det er derfor litt slurvete å benytte seg av
+dette valget. Dette er ikke standard. Hvis du ikke spesifiserer noe
+alternativ vil makepkg spørre brukeren om instrukser.
+.SH "INSTALLASJONS SKRIPT"
+I pakke systemet til Slackware støttes 3 forskjellige typer installasjons
+skript.
+.TP 
+Den første er
+\fBhoved\fP installasjons skriptet. Denne ligger i undermappen \fB./install\fP og
+må ha filnavnet \fBdoinst.sh\fP. Dette (og andre installasjons skript) bør
+skrives med standard 'Bourne shell' syntaks og gjenkjennes av terminal
+programmet \fBash\fP, dette programmet brukes for å kjøre skriptet når man
+installerer fra en diskett. PS! Typisk feiltrinn; vær forsiktig med å bruke
+ustandard syntakstillegg fra \fBbash\fP, skriptet vil fungere fint når det
+kjøres fra harddisken, men vil krasje hvis det kjøres fra en diskett. Dette
+er ikke et problem hvis pakken er kun til personlig bruk. Men vær oppmerksom
+på dette hvis du har tenkt å dele pakken med andre. \fBhoved installasjons
+skriptet\fP kjøres rett etter at pakken er installert med \fBinstallpkg,
+pkgtool,\fP eller \fBsetup.\fP
+.TP 
+Den andre skript typen er
+\fBkonfigurasjons\fP skriptet. Denne ligger i undermappen \fB./var/log/setup\fP og
+må ha et filnavn som starter med \fBsetup.\fP. F.eks heter skriptet for
+konfigurasjon av tidssone: \fB/var/log/setup/setup.timeconfig.\fP Disse
+skriptene kjøres under \fBKONFIGURASJON\fP fasen i \fBsetup,\fP og kjøres på nytt
+hver etterfølgende gang brukeren velger \fBKONFIGURASJON\fP i \fBsetup\fP
+igjen. Vanligvis vil brukeren gå igjennom denne fasen i setup etter å ha
+installert alle Slackware pakkene. Derfor bør alle interaktive funksjoner
+puttes i et slikt skript for ikke å avbryte flyten under installasjon av
+Slackware.
+.TP 
+Den tredje skript typen er
+\fBengangs\fP skript. Som navnet tilsier kjøres disse bare en gang etter at
+pakken er installert, i motsetning til et standard \fBkonfigurasjons\fP
+skript. Disse engangs skriptene ligger også i \fB./var/log/setup\fP og må ha et
+filnavn som begynner med \fBsetup.,\fP men i tillegg til dette må navnet
+inneholde tekststrengen \fBonlyonce.\fP F.eks
+\fB/var/log/setup/setup.onlyonce.testscript\fP
+.SH PAKKEFORMAT
+\fBmakepkg\fP bruker GNU versjonene av tar og gzip for å lage pakkene. En enkel
+måte å pakke ut innholdet (uten å bruke installasjons skriptene naturligvis)
+er å kjøre en kommando som f.eks:
+.TP 
+explodepkg pakke.tgz
+.TP 
+Eller:
+.TP 
+gzip \-dc pakke.tgz | tar xvvf \-
+.SH PROGRAMMERER
+Patrick J. Volkerding <volkerdi@slackware.com>
+.SH "SE OGSÅ"
+\fBinstallpkg(8),\fP \fBexplodepkg(8),\fP \fBremovepkg(8),\fP \fBpkgtool(8),\fP
+\fBupgradepkg(8)\fP

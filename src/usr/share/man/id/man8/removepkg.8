@@ -1,0 +1,84 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH REMOVEPKG 8 "23 Nov 2001" "Slackware Versi 8.1.0" 
+.SH NAMA
+removepkg \- menghapus paket Slackware.
+.SH SINOPSIS
+\fBremovepkg\fP \fBnamapaket\fP
+.LP
+[ \fBROOT=/mnt\fP ] \fBremovepkg\fP [ \fB\-copy\fP ] [ \fB\-keep\fP ] [ \fB\-preserve\fP ] [
+\fB\-warn\fP ] \fBnamapaket\fP
+.SH DESKRIPSI
+\fBremovepkg\fP menghapus paket Slackware yang terinstall, sembari menulis
+laporan kemajuan pada output standar. Sebuah paket bisa ditentukan dengan
+nama lengkap paket  (seperti yang Anda lihat pada /var/log/packages/), atau
+nama dasar paket. Sebagai contoh, paket foo\-1.0\-i486\-1.tgz bisa dihapus
+dengan sembarang perintah berikut:
+
+removepkg foo\-1.0\-i486\-1.tgz (juga dikenali: .tbz, .tlz, .txz)
+
+removepkg foo\-1.0\-i486\-1
+
+removepkg foo.tgz
+
+removepkg foo
+
+Ketika menghapus file, \fBremovepkg\fP akan menganalisa konten dari paket lain
+yang terinstall pada sistem Anda, dan hanya akan menghapus file yang unik
+pada paket yang sedang dihapus. Script installasi juga untuk paket lain juga
+akan diperhatikan ketika menentukan akan menghapus link simbolis dari paket.
+.LP
+Menghapus paket (juga menginstall) bisa berbahaya. Untuk alasan ini,
+terdapat opsi \fB\-warn\fP . Ketika Anda menggunakannya, \fBremovepkg\fP tidak akan
+menghapus file atau link, tetapi menampilkan laporan apa yang akan terjadi
+jika Anda menghapus paket. Disarankan untuk Anda melakukan ini (dan
+mengirimkan hasilnya ke \fBless\fP ) sebelum menghapus paket untuk memastikan
+Anda memback\-up apa yang mungkin dirasa penting.
+.LP
+Ketika menghapus paket, file index asli akan dipindahkan dari
+/var/log/packages ke /var/log/removed_packages. Script installasi juga
+dipindah dari /var/log/scripts ke /var/log/removed_scripts.
+.SH OPSI
+.TP 
+\fB\-warn namapaket\fP
+Menghasilkan laporan pada output standar tentang file dan direktori yang
+akan dihapus, tetapi tidak menghapus paket.
+.TP 
+\fB\-preserve namapaket\fP
+Jika ditentukan, pohon paket direkonstruksi pada
+/var/log/setup/tmp/preserved_packages/namapaket.
+.TP 
+\fB\-copy namapaket\fP
+Menghasilkan salinan paket pada
+/var/log/setup/tmp/preserved_packages/namapaket, tetapi tidak
+menghapusnya. (seperti \-warn \-preserve)
+.TP 
+\fB\-keep\fP
+Menyimpan file yang diciptakan oleh removepkg  (delete_list, required_files,
+uniq_list, del_link_list, required_links, required_list). Biasanya untuk
+tujuan debugging
+.SH " "
+Dimungkinkan untuk menghapus paket dari sistem lain selain / dengan
+memberikan \fBremovepkg\fP variabel lingkungan \fBROOT\fP:
+.TP 
+\fBROOT=/mnt removepkg paket\fP
+
+.SH PEMBUAT
+Patrick J. Volkerding <volkerdi@slackware.com>, dengan penambahan
+oleh Christian Franke <c.franke@acm.org>
+.SH "LIHAT JUGA"
+\fBinstallpkg(8),\fP \fBmakepkg(8),\fP \fBpkgtool(8),\fP \fBupgradepkg(8)\fP

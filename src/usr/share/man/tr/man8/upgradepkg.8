@@ -1,0 +1,71 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH UPGRADEPKG 8 "31 Mayıs 2002" "Slackware Versiyon 8.1.0" 
+.SH İSİM
+upgradepkg \- Slackware paketlerini yükselt.
+.SH ÖZET
+\fBupgradepkg\fP [ \fB\-\-dry\-run\fP ] [ \fB\-\-install\-new\fP ] [ \fB\-\-reinstall\fP ] [
+\fB\-\-verbose\fP ] \fByenipaketadı\fP \fB[\fP\fIyenipaketadı2\fP\fB]\fP
+.LP
+\fBupgradepkg\fP [ \fB\-\-dry\-run\fP ] [ \fB\-\-install\-new\fP ] [ \fB\-\-reinstall\fP ] [
+\fB\-\-verbose\fP ] \fBeskipaketadı%yenipaketadı\fP \fB[\fP\fIeski2%yeni2\fP\fB]\fP
+.SH AÇIKLAMA
+\fBupgradepkg\fP bir Slackware paketini eski sürümden yeni sürüme
+günceller. Bunu sistem üzerine yeni paketi \fBINSTALLING\fP ile yapar, ve sonra
+eski paketten yeni pakette olmayan herhangi bir paketi \fBREMOVING\fP. Eğer
+eski ve yeni paketlerin isimleri aynıysa, tüm gereken tekil bir
+argümandır. Eğer paketler farklı isme sahipse, eski paketin ismini sonuna
+(%) semboli ekleyerek ve sonra yeni paket ismi ile yazınız. eski/yeni paket
+çifti arasına herhangi bir boşluk karakteri eklemeyiniz.
+
+upgradepkg, eski paket adı ile eşleşen birden fazla paket bulursa hepsini
+kaldıracaktır.
+.TP 
+/ dizininden başka bir dizini yükseltmek için (/mnt gibi)
+.TP 
+ROOT=/mnt upgradepkg paket.tgz (ya da .tbz, .tlz, .txz)
+.SH OPSİYONLAR
+.TP 
+\fB\-\-dry\-run\fP
+Hangi paketlerin kurulacağı ya da güncelleneceği ile ilgili bir rapor
+çıkartır fakat güncelleştirmeleri gerçekleştirmez.
+.TP 
+\fB\-\-install\-new\fP
+Normal olarak upgradepkg sadece sistemde kurulu paketleri günceller, ve
+halihazırda sürümü kurulu olmayan paketleri geçer. Eğer \fB\-\-install\-new\fP
+belirtilmişse, davranışı varolanları güncelleştirmeye ek olarak yeni
+paketlerin kurulumu şeklinde değişir.
+.TP 
+\fB\-\-reinstall\fP
+Upgradepkg genellikle eğer sistemde kurulu olan paket tamamiyle aynı olan
+(eşleşen isim, sürüm, mimari ve inşa numarası) aynı paket ise bunları
+geçer. Tüm paketleri aynı sürüm kurulu olsa bile güncellemek istiyorsanız
+\-\-reinstall seçeneğini kullanın.
+.TP 
+\fB\-\-verbose\fP
+Yükseltme işlemi detaylarını göster.
+.SH HATALAR
+Bir paketi güncellemeden önce, saklamak istediğiniz herhangi bir
+yapılandırma dosyasını (/etc içindekiler gibi) kaydedin. Bazen bunlar
+korunur fakat bu paket yapısına bağlıdır. Eğer kurulacak yapılandırma
+dosyalarının yenilerinin kurulmasına zorlamak istiyorsanız upgradepkg
+çalıştırmadan önce öncekileri kaldırın.
+.SH YAZAR
+Patrick J. Volkerding <volkerdi@slackware.com>
+.SH "BİR BAKIN"
+\fBmakepkg(8),\fP \fBinstallpkg(8),\fP \fBremovepkg(8),\fP \fBexplodepkg(8),\fP
+\fBpkgtool(8)\fP

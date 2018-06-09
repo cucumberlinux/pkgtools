@@ -1,0 +1,105 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MAKEPKG 8 "21 Maj 1994" "Slackware wersja 2.0.0" 
+.SH NAZWA
+makepkg \- utwórz pakiety Slackware
+.SH STRESZCZENIE
+\fBmakepkg\fP [ \fB\-l, \-\-linkadd y|n\fP ] [ \fB\-c, \-\-chown y|n\fP ] \fBnazwapakietu\fP
+.SH OPIS
+\fBmakepkg\fP tworzy nowy, kompatybilny z systemem Slackware, pakiet. Pakiet
+ten zostanie zbudowany używając zawartości bieżącego katalogu i wszystkich
+jego podkatalogów. Jeśli istnieją dowiącania symboliczne, przekonwertowane
+one zostaną do kodu w skrypcie, aby po instalacji pakietu ponownie zostały
+zamienione w dowiązania. Kod ten zostanie dołączony do głównego skryptu
+instalacyjnego \fB( install/doinst.sh )\fP, lub, jeśli skrypt ten nie istnieje,
+będzie on utworzony wraz z tą zawartością. Pakiet zostanie zapisany w pliku
+\fBpackagename\fP, który powinien zawierać pełną nazwę wraz z
+rozszerzeniem. Jest to zwykle .tgz lecz .tbz, .tlz lub .txz są także
+dopuszczalne. Odpowiednie narzędzie do kompresji (gzip, bzip2, lzma, lub xz)
+musi być zainstalowane.
+.SH OPCJE
+.TP 
+\fB\-l, \-\-linkadd y|n\fP
+Jeśli y, dodaj jakiekolwiek znalezione dowiązania symboliczne do skryptu
+instalacyjnego (doinst.sh) oraz je usuń. Jest to zalecane. Jeśli opcja ta
+nie zostanie użyta, makepkg zapyta czy dowiązania symboliczne zostały
+znalezione.
+.TP 
+\fB\-p, \-\-prepend\fP
+Opcja ta powoduje, że jakiekolwiek dowiązania symboliczne dodane do
+doinst.sh zostaną załączone do początku istniejącego skryptu. Jest to
+użyteczne przy pakietach zawierających biblioteki współdzielone, które
+powinny być łączone w pierwszej kolejności, gdyż zostaną one później użyte
+przez programy w skrypcie doinst.sh.
+.TP 
+\fB\-c, \-\-chown y|n\fP
+Przy opcji y, makepkg zresetuje wszystkie uprawnienia katalogów do 755 a ich
+przynależność do root:root. Ogólnie, powinno się samemu zadbać o uprawnienia
+i przynależność, a poleganie ustawieniu tej opcji na 'y' jest troche
+niedbałe. Nie jest to wartość domyślna. Jeśli opcja ta nie jest podana,
+makepkg o to zapyta.
+.SH "SKRYPTY INSTALACYJNE"
+Istnieją 3 rodzaje skryptów instalacyjnych wspieranych przez system paczkek
+systemu Slackware.
+.TP 
+Pierwszym jest
+\fBgłówny\fP skrypt instalacyjny. Znajduje się on w podkatalogu \fB./install\fP i
+musi nazywać się \fBdoinst.sh\fP by być rozpoznanym. Powinien on (tak jak inne
+skrypty instalacyjne) być napisany używając standardowej składni powłoki
+Bourne (Bourne shell) rozpoznawanej przez powłokę \fBash\fP, gdyż jest to
+powłoka używana do uruchomienia skryptów przy instalacji z dyskietki systemu
+Slackware. Jest to częsta pułapka \- unikaj rozszerzeń typowych dla \fBbash\fP,
+gdyż mimo, że skrypt zadziała poprawnie gdy instalowany z twardego dysku,
+lecz wyrzuci błąd gdy instalowany z dyskietki. Jeśli pakiet jest do użytku
+osobistego, nie stanowi to problem. Uważaj, jednak, jeśli planujesz
+podzielić się pakietem z innymi. \fBGłówny skrypt instalacyjny\fP jest
+wykonywany bezpośrednio po instalacji pakietu przy pomocy \fBinstallpkg,
+pkgtool,\fP lub \fBsetup\fP.
+.TP 
+Drugim rodzajem skryptu jest
+Skrypt \fBkonfiguracyjny\fP. Znajduje się on w podkatalogu \fB./var/log/setup\fP a
+jego nazwa musi zaczynać się od \fBsetup\fP aby był rozpoznawany. Przykładem
+jest skrypt strefy czasowej: \fB/var/log/setup/setup.timeconfig\fP. Skrypty te
+wykonywane są podczas etapu konfiguracji (ang. \fBCONFIGURE\fP) programu
+\fBsetup\fP i są wywoływane za każdym razem, gdy użytkownik go uruchomi. Zwykle
+użytkownik przechodzi przez ten etap po zakończeniu instalacji wyszstkich
+pakietów. Jeśli cokolwiek ma być interaktywne, musi to trafić do jednego z
+tych skryptów by uniknąć blokowania procesu instalacyjnego pakietów podczas
+użycia programu \fBsetup\fP.
+.TP 
+Trzecim typem skryptu jest
+skrypt \fBonlyonce\fP (tylkoraz). Jak nazwa wskazuje, w odróżnieniu od
+standardowych skryptów \fBkonfiguracyjnych\fP, skrypty te wykonywane są tylko
+raz po tym jak pakiet został zainstalowany. Skrypty te znajdują się w
+katalogu \fB./var/log/setup\fP i muszą mieć ciąg \fBonlyonce\fP w
+nazwie. Przykładem może być skrypt o nazwie
+\fB/var/log/setup/setup.onlyonce.testscript\fP.
+.SH "FORMAT PAKIETU"
+\fBmakepkg\fP używa GNU tar oraz GNU gzip przy tworzeniu pakietów. Prostym
+sposobem na wyszczególnienie zawartości pakietu (oczywiście bez uruchomienia
+skryptów instalacyjnych) jest użycie następującej komendy:
+.TP 
+explodepkg paczka.tgz
+.TP 
+Lub coś takiego:
+.TP 
+gzip \-dc paczka.tgz | tar xvvf \-
+.SH AUTOR
+Patrick J. Volkerding <volkerdi@slackware.com>
+.SH "ZOBACZ RÓWNIEŻ"
+\fBinstallpkg(8),\fP \fBexplodepkg(8),\fP \fBremovepkg(8),\fP \fBpkgtool(8),\fP
+\fBupgradepkg(8)\fP

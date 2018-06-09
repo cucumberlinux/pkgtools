@@ -1,0 +1,77 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH PKGTOOL 8 "24 Nov 1995" "Slackware Versión 3.1.0" 
+.SH NOMBRE
+pkgtool \- herramienta de mantenimiento de paquetes de software.
+.SH SINOPSIS
+\fBpkgtool\fP
+.LP
+\fBpkgtool\fP [ \fB\-\-sets #a#b#c#\fP ] [ \fB\-\-source_mounted\fP ] [
+\fB\-\-ignore_tagfiles\fP ] [ \fB\-\-tagfile tagfile\fP ] [ \fB\-\-source_dir directorio\fP
+] [ \fB\-\-target_dir directorio\fP ] [ \fB\-\-source_device dispositivo\fP ]
+.SH DESCRIPCIÓN
+\fBpkgtool\fP es una herramienta de mantenimiento de paquetes manejada por
+menú, incluida con la distribución Slackware Linux. Le permite al usuario
+instalar, borrar, o ver paquetes de software a través de un sistema
+interactivo. Pkgtool puede también ser usado para correr de nuevo los
+scripts normalmente ejecutados al final de una instalación de
+Slackware. Esto es útil para realizar una configuración básica de nuevo
+(como cambiar el tipo de ratón).
+.SH OPCIONES
+La mayoría de los usuarios no querrán usar ninguna opción al ejecutar
+\fBpkgtool.\fP Las opciones son generalmente usadas solo cuando \fBpkgtool\fP se
+ejecuta durante la instalación inicial del sistema. Siéntase libre de
+probarlas, pero tenga cuidado.
+.TP 
+\fB\-\-sets #A#B#C#\fP
+Instala las series de discos A, B, C. Separe las series de discos con
+símbolos '#'.
+.TP 
+\fB\-\-source_mounted\fP
+Cuando esta opción está presente, \fBpkgtool\fP no intentará desmontar y montar
+de nuevo el dispositivo origen con cada disco.
+.TP 
+\fB\-\-ignore_tagfiles\fP
+Cuando esta opción está presente, \fBpkgtool\fP instalará todos los paquetes
+encontrados, a pesar de lo que digan los tagfiles.
+.TP 
+\fB\-\-tagfile tagfile\fP
+Esta opción se utiliza para especificar desde la línea de comandos cuál
+tagfile debe ser usado para la instalación.
+.TP 
+\fB\-\-source_dir directorio\fP
+Usado cuando se instalan múltiples paquetes desde series de discos. Este es
+el directorio en el cual se encuentran los subdirectorios para cada
+disco. Esto no se utiliza cuando se instala desde disquete.
+.TP 
+\fB\-\-target_dir directorio\fP
+El directorio donde la raíz destino se encuentra. Esto es '/' cuando se
+instala desde el disco duro, o típicamente '/mnt' cuando se instala desde un
+disco de instalación.
+.TP 
+\fB\-\-source_device dispositivo\fP
+El dispositivo origen desde el cual se instala. Esto no se usa si la
+opción \fB\-\-source_mounted\fP es especificada.
+Normalmente se usa cuando se instala desde disquete, como en:
+ \-\-source_device /dev/fd0u1440
+o
+ \-\-source_device /dev/fd1h1200.
+.SH AUTOR
+Patrick J. Volkerding <volkerdi@slackware.com>
+.SH "VER TAMBIÉN"
+\fBmakepkg(8),\fP \fBexplodepkg(8),\fP \fBinstallpkg(8),\fP \fBremovepkg(8),\fP
+\fBupgradepkg(8)\fP

@@ -1,0 +1,106 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MAKEPKG 8 "21 Maggio 1994" "Slackware Versione 2.0.0" 
+.SH NOME
+makepkg \- crea i pacchetti Slackware.
+.SH SINOSSI
+\fBmakepkg\fP [ \fB\-l, \-\-linkadd y|n\fP ] [ \fB\-c, \-\-chown y|n\fP ] \fBnomepacchetto\fP
+.SH DESCRIZIONE
+\fBmakepkg\fP crea un nuovo pacchetto compatibile con Slackware.  Il pacchetto
+è costruito usando il contenuto della cartella corrente e tutte le sue
+sottocartelle. Se esistono collegamenti simbolici, saranno convertiti a
+codice script e ricreati quando il pacchetto sarà installato. Questo codice
+sarà aggiunto allo script di installazione primaria \fB( install/doinst.sh )\fP
+, o, se lo script non esiste sarà creato con quelli contenuti.  Il pacchetto
+sarà trascritto al file \fBnomepacchetto\fP il quale dovrebbe essere il nome
+completo, compresa l'estensione.  Questa è solitamente .tgz, ma sono
+accettate anche .tbz, .tlz, e .txz. I relativi strumenti di compressione
+(gzip, bzip2, lzma, o xz) devono essere installati sulla macchina.
+.SH OPZIONI
+.TP 
+\fB\-l, \-\-linkadd y|n\fP
+Se y, aggiunge i collegamenti simbolici trovati allo script di installazione
+(doinst.sh) e li cancella.  Questa è l'azione raccomandata. Se questa
+opzione non è usata, makepkg visualizzerà se i collegamenti simbolici sono
+stati trovati.
+.TP 
+\fB\-p, \-\-prepend\fP
+Se questa opzione è data, allora ogni collegamento simbolico aggiunto a
+doinst.sh sarà predisposto allo script esistente.  Questo è utile per
+pacchetti che contengono librerie condivise che necessitano di essere
+collegate prima perchè i programmi le useranno successivamente nello script
+doinst.sh.
+.TP 
+\fB\-c, \-\-chown y|n\fP
+Se y, makepkg resetterà tutte i permessi delle cartelle a 755 e il
+proprietari a root:root.  In generale, dovresti settare tu stesso i permessi
+e i proprietari, mentre usare questa opzione è una cosa piuttosto
+approssimativa.  Non è il predefinito.  Se nessuna opzione è data, makepkg
+visualizzerà un output.
+.SH "SCRIPT DI INSTALLAZIONE"
+Ci sono tre tipi di script di installazione supportati nel sistema pacchetti
+di Slackware.
+.TP 
+Il primo è il
+Script di instazzione \fBprimario\fP.  Questo si puo' trovare nella
+sottocartella \fB./install\fP e deve avere il nome \fBdoinst.sh\fP per essere
+riconosciuto. Questo ( e altri script di installazione) dovrebbe essere
+scritto usando la sintassi della Bourne shell riconosciuta dalla \fBash\fP
+shell, in quanto questa è la shell che sarà usata per eseguire lo script
+quando l'installazione viene fatta da un dischetto. Questo è un errore
+comune \- attenzione all'usare sintassi di estensione \fBbash\fP, perchè lo
+script lavorerà bene quanto l'installazione è del disco rigido, mentre
+fallirà quando installato dal dischetto. Se il pacchetto è per uso
+personale, questo non è un problema. Attenzione, se hai intenzione di
+condividere il tuo pacchetto con altri utenti.  Lo \fBscript di installazione
+primario\fP è eseguito immediatamente dopo che il pacchetto è stato installato
+con  \fBinstallpkg, pkgtool,\fP o \fBsetup.\fP
+.TP 
+Il secono tipo di script è
+Script di \fBconfigurazione\fP. Questo si trova nella sottocartella
+\&\fB./var/log/setup\fP e deve avere un nome che inizia con \fBsetup.\fP per essere
+riconosciuto. Un esempio è lo script di timezone:
+\fB/var/log/setup/setup.timeconfig.\fP Questi script sono eseguiti durante la
+fase \fBCONFIGURAZIONE\fP di \fBsetup,\fP e sono rieseguiti ogni volta che
+l'utente esegue l'opzione \fBCONFIGURAZIONE\fP da \fBsetup\fP.  Tipicamente,
+l'utente attraverserà questa fase di setup seguendo l'installazione di tutti
+i pacchetti. Ogni cosa che necessita di essere interattiva dovrebbe andare
+in uno di questi script per evitare problemi di installazione del pacchetto
+durante il processo di \fBsetup.\fP
+.TP 
+Il terzo tipo di script è il
+Script \fBsolounavolta\fP. Come suggerisce il nome, questi script sono eseguiti
+sono una volta dopo che il pacchetto è stato installato, diversamente dallo
+script \fBconfigurazione\fP. Inoltre questi script sono presenti nella cartella
+\&\fB./var/log/setup\fP e devono avere il nome che inizia con \fBsetup.,\fP e in
+aggiunta il nome deve contenere la stringa \fBonlyonce.\fP Un esempio potrebbe
+esser uno script con il nome \fB/var/log/setup/setup.onlyonce.testscript\fP
+.SH "FORMATO PACCHETTO"
+\fBmakepkg\fP usa GNU tar piu' GNU gzip per creare il suoi pacchetti. Un modo
+semplice per estrarre i contenuti di un pacchetto (senza eseguire gli script
+di installazione, ovviamente) è di usare un comando come questo:
+.TP 
+explodepkg pacchetto.tgz
+.TP 
+Oppure, qualcosa come questo:
+.TP 
+gzip \-dc pacchetto.tgz | tar xvvf \-
+.SH AUTORE
+Patrick J. Volkerding <volkerdi@slackware.com>
+.SH "VEDI ANCHE"
+\fBinstallpkg(8),\fP \fBexplodepkg(8),\fP \fBremovepkg(8),\fP \fBpkgtool(8),\fP
+\fBupgradepkg(8)\fP

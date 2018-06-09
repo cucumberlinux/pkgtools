@@ -1,0 +1,71 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH UPGRADEPKG 8 "31 Mai 2002" "Slackware Versjon 8.1.0" 
+.SH NAVN
+upgradepkg \- oppgrader en Slackware pakke.
+.SH SAMMENDRAG
+\fBupgradepkg\fP [ \fB\-\-dry\-run\fP ] [ \fB\-\-install\-new\fP ] [ \fB\-\-reinstall\fP ] [
+\fB\-\-verbose\fP ] \fBnyttpakkenavn\fP \fB[\fP\fInyttpakkenavn2\fP\fB]\fP
+.LP
+\fBupgradepkg\fP [ \fB\-\-dry\-run\fP ] [ \fB\-\-install\-new\fP ] [ \fB\-\-reinstall\fP ] [
+\fB\-\-verbose\fP ] \fBgammeltpakkenavn%nyttpakkenavn\fP \fB[\fP\fIgammel2%ny2\fP\fB]\fP
+.SH BESKRIVELSE
+\fBupgradepkg\fP oppgraderer en Slackware pakke fra en eldre versjon til en
+nyere. Den gjør dette ved å \fBINSTALLERE\fP den nye pakken på systemet,
+deretter \fBFJERNER\fP den filer fra den gamle pakken som ikke er inkludert i
+den nye. Hvis den eldre og den nye pakken har samme navn trengs bare det nye
+pakke navnet. Hvis pakkene har ulikt navn må du oppgi den eldre pakken
+etterfulgt av et prosent (%) tegn og deretter den nye. Ikke legg til noe
+mellomrom når du skriver navnene til de eldre/nye pakkene.
+
+Hvis upgradepkg finner flere eldre pakker med samme navn vil alle bli
+fjernet.
+.TP 
+For å oppgradere i en annen filkatalog en / (f.eks /mnt):
+.TP 
+ROOT=/mnt upgradepkg pakke.tgz (eller .tbz, .tlz, .txz)
+.SH VALGMULIGHETER
+.TP 
+\fB\-\-dry\-run\fP
+Skriver ut en raport om hvilke pakker som vil bli installert eller
+oppgradert uten å gjennomfører selve oppgraderingen.
+.TP 
+\fB\-\-install\-new\fP
+Vanligvis vil upgradepkg bare oppgradere pakker som allerede er installert
+på systemet, pakker som ikke er installert fra før vil ignoreres. Hvis
+\fB\-\-install\-new\fP parametre er satt vil dette endres til å installere nye
+pakker i tillegg til å oppgradere de eksisterende pakkene.
+.TP 
+\fB\-\-reinstall\fP
+Upgradepkg vil vanligvis ignorere en oppgradering  som har nøyaktig samme
+pakkenavn (matchende navn, versjon, arkitektur, og produksjons nummer) som
+den installerte versjonen. Bruk \-\-reinstall parametre hvis du vil oppgradere
+alle pakker selv om samme versjon allerede er installert.
+.TP 
+\fB\-\-verbose\fP
+Vis alle nitidige detaljer ved oppgraderingsprosessen.
+.SH SVAKHETER
+Ta et sikkerhetskopi av alle konfigurasjons filer (f.eks de i /etc) som du
+ønsker å ta vare på før du oppgraderer en pakke. Noen ganger vil disse bli
+bevart, men det avhenger av hvordan pakken er bygd opp. Hvis du vil tvinge
+installasjon av de nye konfigurasjons filene kan du fjerne de gamle før du
+kjører upgradepkg.
+.SH PROGRAMMERER
+Patrick J. Volkerding <volkerdi@slackware.com>
+.SH "SE OGSÅ"
+\fBmakepkg(8),\fP \fBinstallpkg(8),\fP \fBremovepkg(8),\fP \fBexplodepkg(8),\fP
+\fBpkgtool(8)\fP

@@ -1,0 +1,75 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH PKGTOOL 8 "24 Nov 1995" "Slackware Versjon 3.1.0" 
+.SH NAVN
+pkgtool \- vedlikeholds verktøy for programvarer.
+.SH SAMMENDRAG
+\fBpkgtool\fP
+.LP
+\fBpkgtool\fP [ \fB\-\-sets #a#b#c#\fP ] [ \fB\-\-source_mounted\fP ] [
+\fB\-\-ignore_tagfiles\fP ] [ \fB\-\-tagfile tagfil\fP ] [ \fB\-\-source_dir filkatalog\fP
+] [ \fB\-\-target_dir filkatalog\fP ] [ \fB\-\-source_device enhet\fP ]
+.SH BESKRIVELSE
+\fBpkgtool\fP er et meny drevet vedlikeholds verktøy for pakke behandling som
+følger med Slackware Linux. Det kan installere, fjerne eller vise pakker
+igjennom et interaktivt system. Pkgtool kan også brukes for å kjøre
+konfigurasjons skriptene etter en Slackware installasjon om igjen. Dette kan
+være nyttig for å endre grunnlegende system innstillinger (f.eks forandre
+mus type).
+.SH VALGMULIGHETER
+De fleste brukere vil nok kjøre \fBpkgtool\fP uten ekstra parametre. Disse
+brukes generelt sett bare når \fBpkgtool\fP kjøres under installasjon av
+Slackware. Du kan naturligvis prøve dem ut \-\- men vær forsiktig.
+.TP 
+\fB\-\-sets #A#B#C#\fP
+Installer pakkeseriene A, B, C. Skill navnene fra hverandre med et '#'
+tegn. 
+.TP 
+\fB\-\-source_mounted\fP
+Når dette parametre er satt vil \fBpkgtool\fP ikke forsøke å avmontere og
+remontere lagringsenheten til pakkene for hver ny serie.
+.TP 
+\fB\-\-ignore_tagfiles\fP
+Når dette parametre er satt vil \fBpkgtool\fP installere alle pakker den kommer
+over uavhengig av hva 'tagfile' filene sier.
+.TP 
+\fB\-\-tagfile tagfil\fP
+Dette parametre lar deg spesifisere fra kommando linjen hvilken 'tagfil' du
+vil bruke under installasjonen.
+.TP 
+\fB\-\-source_dir filkatalog\fP
+Brukt når man installerer flere pakker fra pakkeserier. Dette er
+filkatalogen hvor undermappene med pakkeseriene ligger. Dette skal ikke
+brukes når man installerer fra diskett.
+.TP 
+\fB\-\-target_dir filkatalog\fP
+Toppnivået i filtreet for installasjonen. Standard er '/' når man
+installerer til harddisken og vanligvis '/mnt' når man installerer fra en
+CD.
+.TP 
+\fB\-\-source_device enhet\fP
+Enheten som pakkene skal installeres fra. Dette blir ikke brukt hvis du har oppgitt
+\fB\-\-source_mounted\fP
+parametre. Det brukes vanligvis når man installerer fra diskett, f.eks:
+\-\-source_device /dev/fd0u1440
+eller
+\-\-source_device /dev/fd1h1200.
+.SH PROGRAMMERER
+Patrick J. Volkerding <volkerdi@slackware.com>
+.SH "SE OGSÅ"
+\fBmakepkg(8),\fP \fBexplodepkg(8),\fP \fBinstallpkg(8),\fP \fBremovepkg(8),\fP
+\fBupgradepkg(8)\fP

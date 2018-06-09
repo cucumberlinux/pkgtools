@@ -1,0 +1,89 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH REMOVEPKG 8 "23 Листопада 2001" "Slackware версія 8.1.0" 
+.SH ІМ'Я
+\fBremovepkg\fP \- вилучає пакунки Slackware.
+.SH Перегляд
+\fBremovepkg\fP \fBpackagename\fP
+.LP
+[ \fBROOT=/mnt\fP ] \fBremovepkg\fP [ \fB\-copy\fP ] [ \fB\-keep\fP ] [ \fB\-preserve\fP ] [
+\fB\-warn\fP ] \fBpackagename\fP
+.SH ОПИС
+\fBremovepkg\fP вилучає попередньо встановлений пакунок Slackware, при цьому
+виводить звіт на стандартний вивід.
+ Пакунок може бути вказано по повному імені пакунку (як ви бачите приведені
+у /var/log/packages/), або по основному імені пакунку.
+ Наприклад, пакунок foo\-1.0\-i486\-1.tgz можна вилучити будь\-який з наступних
+команд:
+
+removepkg foo\-1.0\-i486\-1.tgz (також розпізнаються: .tbz, .tlz, .txz)
+
+removepkg foo\-1.0\-i486\-1
+
+removepkg foo.tgz
+
+removepkg foo
+
+При вилученні файлів \fBremovepkg\fP аналізує вміст інших встановлених у вашій
+системі пакунків та вилучає лише ті файли, які є унікальними для пакунку що
+вилучається.
+ Аналогічно, встановлювальні сценарії для усіх інших пакунків будуть
+враховуватися при прийняті рішення, вилучати чи ні символічні посилання.
+.LP
+Вилучення пакунку (як і його  інсталяція) може бути небезпечним .
+ З цієї причини є параметр \fB\-warn\fP. Коли ви його використовуєте,
+\fBremovepkg\fP у дійсності не буде вилучати будь\-які файли або посилання, але
+виведе детальний звіт про те, що він буде робити, якщо ви справді вилучите
+пакунок. Передбачається, що ви зробили це (й, може бути, передали вивід у
+\fBless\fP ) перед вилученням пакунків, щоб переконатися, що ви зробили
+резервні копії усього, що може бути важливим.
+.LP
+При вилученні пакунку його оригінальний індексний файл буде переміщено з
+/var/log/packages у /var/log/removed_packages.
+ Аналогічно, його інсталяційний сценарій буде переміщено з /var/log/scripts
+в /var/log/removed_scripts.
+.SH ПАРАМЕТРИ
+.TP 
+\fB\-warn packagename\fP
+Зґенерувати й вивести на стандартний вивід звіт про те, які файли та
+каталоги буде вилучено, але у дійсності не вилучати пакунок.
+.TP 
+\fB\-preserve packagename\fP
+Якщо вказано, повне піддерево пакунку реконструюється у
+/var/log/setup/tmp/preserved_packages/packagename.
+.TP 
+\fB\-copy packagename\fP
+Створити копію пакунку всередині
+/var/log/setup/tmp/preserved_packages/packagename, але не вилучати його.
+ (такий самий ефект, як \-warn \-preserve)
+.TP 
+\fB\-keep\fP
+Зберегти проміжні файли, створені \fBremovepkg\fP (delete_list, required_files,
+uniq_list, del_link_list, required_links, required_list).
+ Досить корисно для налагодження.
+.SH " "
+Це можливість вилучити пакунок з файлової системи, що відрізняється від /,
+викликом \fBremovepkg\fP зі змінною оточення \fBROOT\fP:
+ \fBROOT=/mnt removepkg package\fP
+.TP 
+\fBROOT=/mnt removepkg package\fP
+
+.SH АВТОРИ
+Patrick J. Volkerding <volkerdi@slackware.com>, с дополнениями от
+Christian Franke <c.franke@acm.org>
+.SH "ДИВИСЬ ТАКОЖ"
+\fBinstallpkg(8),\fP \fBmakepkg(8),\fP \fBpkgtool(8),\fP \fBupgradepkg(8)\fP

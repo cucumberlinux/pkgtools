@@ -1,0 +1,91 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH INSTALLPKG 8 "22 Nov 2001" "Slackware Version 8.1.0" 
+.SH NAMN
+installpkg \- installera Slackware paket.
+.SH ÖVERSIKT
+\fBinstallpkg\fP [ \fB\-\-warn\fP ] [ \fB\-\-md5sum\fP ] [ \fB\-\-root /annanroot\fP ] [
+\fB\-\-infobox\fP ] [ \fB\-\-menu\fP ] [ \fB\-\-terse\fP ] [ \fB\-\-ask\fP ] [ \fB\-\-priority
+ADD|REC|OPT|SKP\fP ] [ \fB\-\-tagfile /katalog/tagfil\fP ] \fBpaketnamn\fP [
+\fBpaketnamn2...\fP ]
+.SH BESKRIVNING
+\fBinstallpkg\fP installerar en eller flera *.tgz (eller .tbz, .tlz, .txz)
+binärpaket som utformats för användning med Slackware Linux\-distribution på
+ditt system.
+.SH ALTERNATIV
+.TP 
+\fB\-\-warn paketnamn\fP
+Generera en lista med filer som skulle skrivas över till standard ut, men
+installerar egentligen inte paketet. Listan är formaterad på ett lämpligt
+sätt för att använda som en lista med filer att säkerhetskopiera.
+.TP 
+\fB\-\-md5sum paketnamn\fP
+Registrera paketets md5sum i metadata skriven i /var/log/paket.
+.TP 
+\fB\-\-root /annanroot\fP
+Installera på en annan plats än / (standard) som root av filsystemet att
+installera på. I det givna exemplet, används /annanroot
+istället. Inställning av ROOT miljövariabeln gör samma sak.
+.TP 
+\fB\-\-infobox\fP
+Använd /bin/dialog för att visa en informationsdialogruta när paketet är
+installerat. Används främst när installpkg anropas från andra skript.
+.TP 
+\fB\-\-menu\fP
+Använd /bin/dialog för att visa en meny som frågar användaren om de vill
+installera paketet(er) eller inte. Används generellt när installpkg anropas
+från andra skript.
+.TP 
+\fB\-\-terse\fP
+Installera paketet och visar endast en rad beskrivning till stdout.
+.TP 
+\fB\-\-ask\fP
+Används med \-menu läge. När du väljer detta, frågas alltid om ett paket ska
+installeras oavsett vad paketets prioritet är.
+.TP 
+\fB\-\-priority ADD|REC|OPT|SKP\fP
+Vid installation med \-menu alternativet är paketprioritetsnivåer (som finns
+i filen "tagfile" i paket\-katalogen) som används för att automatiskt
+installera (ADD) eller hoppa över (SKP) ett paket, eller att rekommendera
+(REC) eller frivilliga (OPT) för användaren om en meny visas. Om prioritet
+är inställd på kommandoraden kommer det att åsidosätta de värden som finns i
+tagfilen för hela paketlistan.
+.TP 
+\fB\-\-tagfile /katalog/tagfil\fP
+Ange en annan fil som ska användas för paket prioriteringar (i detta exempel
+kommer, /katalog/tagfil att användas). Standard är "tagfile" i
+paket\-katalog.
+.SH EXEMPEL
+.TP 
+\fBInstallera teckensnittspaket för X:\fP
+.P
+installpkg font\-bh\-ttf\-1.0.3\-noarch\-1.txz
+.P
+Observera att om ett paket redan är installerat, bör upgradepkg(8) användas
+i stället.
+.TP 
+\fBSkapa en säkerhetskopia av filer som skulle skrivas över om paketet är installerat:\fP
+.P
+.nf
+tar czvf /tmp/backupp.tar.gz \e
+$(installpkg \-\-warn font\-bh\-ttf\-1.0.3\-noarch\-1.txz)
+.fi
+.SH FÖRFATTARE
+Patrick J. Volkerding <volkerdi@slackware.com>
+.SH "SE OCKSÅ"
+\fBmakepkg(8),\fP \fBremovepkg(8),\fP \fBexplodepkg(8),\fP \fBpkgtool(8),\fP
+\fBupgradepkg(8)\fP

@@ -1,0 +1,73 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH PKGTOOL 8 "24 Kasım 1995" "Slackware Versiyon 3.1.0" 
+.SH İSİM
+pkgtool \- yazılım paketi yönetim aracı.
+.SH ÖZET
+\fBpkgtool\fP
+.LP
+\fBpkgtool\fP [ \fB\-\-sets #a#b#c#\fP ] [ \fB\-\-source_mounted\fP ] [
+\fB\-\-ignore_tagfiles\fP ] [ \fB\-\-tagfile tagdosyası\fP ] [ \fB\-\-source_dir dizin\fP ]
+[ \fB\-\-target_dir dizin\fP ] [ \fB\-\-source_device aygıt\fP ]
+.SH AÇIKLAMA
+\fBpkgtool\fP menüye\-dayalı Slackware Linux ile sağlanan bir paket bakım
+aracıdır. Kullanıcının kurma, kaldırma ya da etkileşimli bir sistem
+üzerinden yazılım paketi görüntülemesini sağlar. Pkgtool ayrıca normal
+olarak Slackware kurulumu sonunda çalıştırılan menüye\-dayalı betiklerin
+yeniden çalıştırılmasını sağlar. Bu temel yeniden yapılandırma (fare türünün
+değiştirilmesi gibi) işlemleri için kullanışlıdır.
+.SH OPSİYONLAR
+Çoğu kullanıcı \fBpkgtool\fP çalıştırırken herhangi bir seçenek kullanmak
+istemeyecektir. Bunlar genellikle sadece \fBpkgtool\fP ilk sistem kurulumu
+sırasında çalıştırıldığında kullanılır. Denemeye çekinmeyin fakat dikkatli
+olun.
+.TP 
+\fB\-\-sets #A#B#C#\fP
+A, B, C disk setlerini kur. Disk seti adları '#' sembolü ile ayrılır.
+.TP 
+\fB\-\-source_mounted\fP
+Eğer bu bayrak varsa, \fBpkgtool\fP kaynak cihazı her bir disk ile ayırmaya ya
+da bağlamaya çalışmayacaktır.
+.TP 
+\fB\-\-ignore_tagfiles\fP
+Bu bayrak olduğunda, \fBpkgtool\fP tagfiles ne söylerse söylesin karşılaştığı
+her paketi kuracaktır.
+.TP 
+\fB\-\-tagfile tagdosyası\fP
+Bu bayrak komut satırından kurulum için hangi tagfile dosyasının
+kullanılması gerektiğini belirtmek için kullanılır.
+.TP 
+\fB\-\-source_dir dizin\fP
+Disk kümelerinden çoklu paket kurulumu olduğunda kullanılır. Bu her bir disk
+için alt dizinlerin bulunduğu dizindir. Floppy ile kurulumda bu kullanılmaz.
+.TP 
+\fB\-\-target_dir dizin\fP
+Hedef kök dizinin yerleştirildiği dizindir. Sabir sürücüye kurarken '/' dir
+ya da kurulum diskinden kurarken tipik olarak '/mnt'.
+.TP 
+\fB\-\-source_device aygıt\fP
+Kurulum yapılacak kaynak cihaz. Eğer şunu sağlarsanız bu kullanılmaz
+\fB\-\-source_mounted\fP
+bayrağı. Genellikle floppy'den kurulum yapılırken genellikle şöyle kullanılır:
+ \-\-source_device /dev/fd0u1440
+ya da
+ \-\-source_device /dev/fd1h1200.
+.SH YAZAR
+Patrick J. Volkerding <volkerdi@slackware.com>
+.SH "BİR BAKIN"
+\fBmakepkg(8),\fP \fBexplodepkg(8),\fP \fBinstallpkg(8),\fP \fBremovepkg(8),\fP
+\fBupgradepkg(8)\fP

@@ -1,0 +1,51 @@
+#!/bin/bash
+#BLURB="Change the kernel that the system boots from"
+
+while [ true ]; do
+	ARGS=""
+
+	for kernel in $(ls $ROOT/boot/ -r | grep vmlinuz-[0-9]); do
+		ARGS+="$(echo $kernel | cut -d - -f 2- ) "
+		if [ "$kernel" == $(readlink $ROOT/boot/vmlinuz) ]; then
+			ARGS+=" DEFAULT"
+			if [ "$kernel" == $(readlink $ROOT/boot/vmlinuz-fallback) ]; then
+				ARGS+=",FALLBACK "
+			fi
+			ARGS+=" "
+		elif [ "$kernel" == $(readlink $ROOT/boot/vmlinuz-fallback) ]; then
+			ARGS+=" FALLBACK "
+		else
+			ARGS+=" - "
+		fi
+		
+	done
+
+	dialog --ok-label "Set default" \
+		--defaultno --cancel-label "Done" \
+		--extra-button --extra-label "Set fallback" \
+		--title "Set Kernel Version" \
+		--menu "This menu allows you to change the kernel version that is loaded by the bootloader on this system. Use the \"set default\" button to set it as your default kernel and \"set fallback\" to set it as your fallback kernel. Only set your fallback kernel to a kernel that you know works. Otherwise, you could find yourself with an unbootable system if a kernel update fails." \
+		20 60 20 $ARGS 2> /tmp/choice
+	STATUS=$?
+	VERSION=$(cat /tmp/choice)
+	rm /tmp/choice
+	echo $VERSION
+	case $STATUS in
+	0)	# Set default
+		if [ -e $ROOT/boot/efi/EFI/cucumber ]; then
+			rm $ROOT/boot/efi/EFI/cucumber/vmlinuz.efi
+			cp $ROOT/boot/vmlinuz-$VERSION $ROOT/boot/efi/EFI/cucumber/vmlinuz.efi
+		fi
+		ln -sf vmlinuz-$VERSION $ROOT/boot/vmlinuz 
+		;;
+	3)	# Set fallback
+		if [ -e $ROOT/boot/efi/EFI/cucumber ]; then
+			rm $ROOT/boot/efi/EFI/cucumber/vmlinuz-fallback.efi
+			cp $ROOT/boot/vmlinuz-$VERSION $ROOT/boot/efi/EFI/cucumber/vmlinuz-fallback.efi
+		fi
+		ln -sf vmlinuz-$VERSION $ROOT/boot/vmlinuz-fallback 
+		;;
+	*)	# Done
+		exit
+	esac
+done

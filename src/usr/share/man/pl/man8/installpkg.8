@@ -1,0 +1,89 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH INSTALLPKG 8 "22 Lis 2001" "Slackware Wersja 8.1.0" 
+.SH NAZWA
+installpkg \- instaluj pakiety systemu Slackware.
+.SH STRESZCZENIE
+\fBinstallpkg\fP [ \fB\-\-warn\fP ] [ \fB\-\-md5sum\fP ] [ \fB\-\-root /otherroot\fP ] [
+\fB\-\-infobox\fP ] [ \fB\-\-menu\fP ] [ \fB\-\-terse\fP ] [ \fB\-\-ask\fP ] [ \fB\-\-priority
+ADD|REC|OPT|SKP\fP ] [ \fB\-\-tagfile /somedir/tagfile\fP ] \fBpackagename\fP [
+\fBpackagename2 ...\fP ]
+.SH OPIS
+\fBinstallpkg\fP instaluje jedną lub więcej paczek binarnych *.tgz (lub .tbz,
+\&.tlz, .txz) przeznaczonych do użytku z dystrybucją Slackware Linux.
+.SH OPCJE
+.TP 
+\fB\-\-warn nazwapakietu\fP
+Wyświetl (na standardowym wyjściu) listę plików, które zostaną nadpisane,
+ale nie instaluj pakietu. Lista ta będzie odpowiednio sformatowana do użycia
+przy tworzeniu kopii zapasowej.
+.TP 
+\fB\-\-md5sum nazwapakietu\fP
+Zapisz sumę md5sum pakietu w metadanych zapisanych w /var/log/packages.
+.TP 
+\fB\-\-root /otherroot\fP
+Instaluj używając jako root systemu docelowego lokację inną niż /
+(domyślnie). W podanym przykładzie, zamiast tego użyj /otherroot. Ustawianie
+zmiennej środowiskowej ROOT działa tak samo.
+.TP 
+\fB\-\-infobox\fP
+Użyj /bin/dialog by wyświetlić ramkę informacyjną podczas instalacji
+pakietu. Głównie używane gdy inkstallpkg jest wywoływany z innych skryptów.
+.TP 
+\fB\-\-menu\fP
+Użyj /bin/dialog by wyświetlić menu pytające użytkownika, czy zainstalować
+pakiet(y). Generalnie używane gdy installpkg jest wywoływany z innego
+skryptu.
+.TP 
+\fB\-\-terse\fP
+Instaluj pakiety wyświetlając wyłącznie jednolinijkowy opis w stdout.
+.TP 
+\fB\-\-ask\fP
+Używany w trybie \-menu. Jeśli zaznaczone, zawsze pytaj czy zainstalować
+pakiet niezależnie od priorytetu tego pakietu.
+.TP 
+\fB\-\-priority ADD|REC|OPT|SKP\fP
+Instalując z opcją \-menu, użyte zostaną poziomy priorytetu pakietu
+(znajdujące się w pliku "tagfile" w katalogu pakietu) w celu automatycznej
+instalacji (ADD) lub pominięcia (SKP) pakietu, lub aby zasygnalizować
+użytkownikowi pakiety zalecane (REC) lub opcjonalne (OPT) jeśli wyświetlone
+jest menu. Jeśli priorytet jest ustawiony  z linii komend, wartości
+określone w pliku tagfile zostaną nadpisane dla całej listy pakietów.
+.TP 
+\fB\-\-tagfile /somedir/tagfile\fP
+Podaj inny plik na priorytety pakietu (w tym przykładzie, /somedir/tagfile
+zostanie użyty). Domyślnie jest to "tagfile" w katalogu pakietu.
+.SH PRZYKŁADY
+.TP 
+\fBInstaluj pakiet czcionki dla X:\fP
+.P
+installpkg font\-bh\-ttf\-1.0.3\-noarch\-1.txz
+.P
+Zwróć uwagę, że Jeśli pakiet jest już zainstalowany, powinno się użyć
+upgradepkg(8).
+.TP 
+\fBUtwórz kopię zapasową plików, które zostałyby nadpisane jeśli pakiet jest zainstalowany:\fP
+.P
+.nf
+tar czvf /tmp/backup.tar.gz \e
+$(installpkg \-\-warn font\-bh\-ttf\-1.0.3\-noarch\-1.txz)
+.fi
+.SH AUTOR
+Patrick J. Volkerding <volkerdi@slackware.com>
+.SH "ZOBACZ RÓWNIEŻ"
+\fBmakepkg(8),\fP \fBremovepkg(8),\fP \fBexplodepkg(8),\fP \fBpkgtool(8),\fP
+\fBupgradepkg(8)\fP

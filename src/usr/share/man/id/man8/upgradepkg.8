@@ -1,0 +1,71 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH UPGRADEPKG 8 "31 Mei 2002" "Slackware Versi 8.1.0" 
+.SH NAMA
+upgradepkg \- mengupgrade paket Slackware.
+.SH SINOPSIS
+\fBupgradepkg\fP [ \fB\-\-dry\-run\fP ] [ \fB\-\-install\-new\fP ] [ \fB\-\-reinstall\fP ] [
+\fB\-\-verbose\fP ] \fBnamapaketbaru\fP \fB[\fP\fInamapaketbaru2\fP\fB]\fP
+.LP
+\fBupgradepkg\fP [ \fB\-\-dry\-run\fP ] [ \fB\-\-install\-new\fP ] [ \fB\-\-reinstall\fP ] [
+\fB\-\-verbose\fP ] \fBnamapaketlama%namapaketbaru\fP \fB[\fP\fIold2%new2\fP\fB]\fP
+.SH DESKRIPSI
+\fBupgradepkg\fP mengupgrade paket Slackware dari versi lama ke versi baru. Ia
+melakukannya dengan \fBMENGINSTALL\fP paket baru pada sistem, lalu \fBMENGHAPUS\fP
+semua file dari paket lama yang tidak ada pada paket baru.  Jika paket lama
+dan baru memiliki nama yang sama, cukup satu argumen saja. Jika paket
+memiliki nama yang berbeda, berikan nama paket lama diikuti dengan simbol
+persen (%), lalu nama paket baru. Jangan tambahkan spasi diantara pasangan
+lama/baru.
+
+Jika upgradepkg menemukan lebih dari satu paket yang terinstall yang cocok
+dengan nama paket lama, maka akan dihapus semuanya.
+.TP 
+Untuk menghapus pada direktori selain / (seperti /mnt):
+.TP 
+ROOT=/mnt upgradepkg paket.tgz (atau .tbz, .tlz, .txz)
+.SH OPSI
+.TP 
+\fB\-\-dry\-run\fP
+Menghasilkan laporan tentang paket yang akan diinstall atau diupgrade tetapi
+tidak melakukan upgrade yang sesungguhnya.
+.TP 
+\fB\-\-install\-new\fP
+Normalnya upgradepkg hanya mengupgrade paket yang sudah terinstall pada
+sistem, dan melewatkan paket yang belum  terinstall. Jika \fB\-\-install\-new\fP
+ditentukan, perilaku ini dimodifikasi untuk menginstall paket baru selain
+hanya mengupgrade yang sudah ada.
+.TP 
+\fB\-\-reinstall\fP
+Upgradepkg biasanya melewatkan paket jika paket yang sama (nama, versi,
+arsitektur, dan nomor build) sudah terinstall pada sistem. Gunakan opsi
+\-\-reinstall jika Anda hendak mengupgrade semua paket meskipun versi yang
+sama sudah terinstall.
+.TP 
+\fB\-\-verbose\fP
+Menampilkan semua detail dari upgrade.
+.SH KESALAHAN
+Sebelum mengupgrade paket, simpan semua file konfigurasi (seperti pada /etc)
+yang hendak Anda simpan. Seringkali file ini akan dipertahankan, tetapi
+tergantung dari struktur paket. Jika Anda hendak memaksa versi baru dari
+file konfigurasi untuk diinstall, hapus yang lama secara manual sebelum
+menjalankan upgradepkg.
+.SH PEMBUAT
+Patrick J. Volkerding <volkerdi@slackware.com>
+.SH "LIHAT JUGA"
+\fBmakepkg(8),\fP \fBinstallpkg(8),\fP \fBremovepkg(8),\fP \fBexplodepkg(8),\fP
+\fBpkgtool(8)\fP

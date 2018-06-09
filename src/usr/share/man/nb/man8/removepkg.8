@@ -1,0 +1,85 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH REMOVEPKG 8 "23 Nov 2001" "Slackware Versjon 8.1.0" 
+.SH NAVN
+removepkg \- fjern Slackware pakker.
+.SH SAMMENDRAG
+\fBremovepkg\fP \fBpakkenavn\fP
+.LP
+[ \fBROOT=/mnt\fP ] \fBremovepkg\fP [ \fB\-copy\fP ] [ \fB\-keep\fP ] [ \fB\-preserve\fP ] [
+\fB\-warn\fP ] \fBpakkenavn\fP
+.SH BESKRIVELSE
+\fBremovepkg\fP fjerner en installert Slackware pakke, mens informasjon om
+fremdriften blir skrevet ut (til stdout). En pakke kan oppgis enten med sitt
+fulle navn (slik det er listet opp i /var/log/packages/), eller med den
+første delen av pakkens navn. For eksempel kan pakken foo\-1.0\-i486\-1.tgz
+fjernes med følgende kommandoer:
+
+removepkg foo\-1.0\-i486\-1.tgz (også gyldig: .tbz, .tlz, .txz)
+
+removepkg foo\-1.0\-i486\-1
+
+removepkg foo.tgz
+
+removepkg foo
+
+Når filene slettes vil \fBremovepkg\fP se igjennom innholdet i de andre pakkene
+på systemet, bare filer som er unike for pakken vil bli slettet. På samme
+måte vil også installasjons skriptene til de andre pakkene sjekkes før det
+besluttes om symbolske lenker i pakken skal slettes eller beholdes.
+.LP
+Å fjerne pakker (eller å installere dem) kan være en farlig
+beskjeft. Nettopp derfor er \fB\-warn\fP parametre tilgjengelig. Med dette
+parametre vil ikke \fBremovepkg\fP fjerne filene eller de symbolske lenkene,
+men en detaljert raport av hva den normalt ville ha slettet vil bli
+skrevet. For eksempel kan du benytte dette parametre (og kanskje videresende
+dette til \fBless\fP) før du fjerner pakker for å sjekke at du har tatt backup
+av viktige ting.
+.LP
+Når en pakke fjernes vil den originale listen over pakkens innhold flyttes
+fra /var/log/packages til /var/log/removed_packages. Installasjons skriptet
+vil på samme måte bli flyttet fra /var/log/scripts til
+/var/log/removed_scripts.
+.SH VALGMULIGHETER
+.TP 
+\fB\-warn pakkenavn\fP
+Skriv ut en raport (til stdout) om hvilke filer som normalt ville ha blitt
+fjernet, men ikke slett noe.
+.TP 
+\fB\-preserve pakkenavn\fP
+Med dette valget vil en sikkerhetskopi av pakkens innhold lagres i
+/var/log/setup/tmp/preserved_packages/pakkenavn.
+.TP 
+\fB\-copy pakkenavn\fP
+Lag en kopi av pakken i /var/log/setup/tmp/preserved_packages/pakkenavn,
+uten å avinstallere pakken. (samme effekt som \-warn \-preserve)
+.TP 
+\fB\-keep\fP
+Lagrer midlertidige arbeids filer som opprettes av removepkg (delete_list,
+required_files, uniq_list, del_link_list, required_links,
+required_list). Nyttig for feilsøking.
+.SH " "
+Det er mulig å fjerne pakker fra et annet filsystem en / ved å oppgi \fBROOT\fP
+variabelen til \fBremovepkg\fP:
+.TP 
+\fBROOT=/mnt removepkg pakke\fP
+
+.SH PROGRAMMERERE
+Patrick J. Volkerding <volkerdi@slackware.com>, med forbedringer av
+Christian Franke <c.franke@acm.org>
+.SH "SE OGSÅ"
+\fBinstallpkg(8),\fP \fBmakepkg(8),\fP \fBpkgtool(8),\fP \fBupgradepkg(8)\fP

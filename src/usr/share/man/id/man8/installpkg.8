@@ -1,0 +1,89 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH INSTALLPKG 8 "22 Nov 2001" "Slackware Versi 8.1.0" 
+.SH NAMA
+installpkg \- menginstall paket Slackware.
+.SH SINOPSIS
+\fBinstallpkg\fP [ \fB\-\-warn\fP ] [ \fB\-\-md5sum\fP ] [ \fB\-\-root /otherroot\fP ] [
+\fB\-\-infobox\fP ] [ \fB\-\-menu\fP ] [ \fB\-\-terse\fP ] [ \fB\-\-ask\fP ] [ \fB\-\-priority
+ADD|REC|OPT|SKP\fP ] [ \fB\-\-tagfile /direktori/filetag\fP ] \fBnamapaket\fP [
+\fBnamapaket2 ...\fP ]
+.SH DESKRIPSI
+\fBinstallpkg\fP menginstall atau atau banyak paket biner *.tgz (atau .tbz,
+\&.tlz, .txz) yang didesain untuk distribusi Slackware Linux pada sistem Anda.
+.SH OPSI
+.TP 
+\fB\-\-warn namapaket\fP
+Menghasilkan daftar file yang akan ditimpa pada output standar, tetapi tidak
+menginstall paket yang sebenarnya. Daftar diformat dengan cara yang sesuai
+untuk digunakan sebagai daftar file yang akan dibackup.
+.TP 
+\fB\-\-md5sum namapaket\fP
+Mencatat md5sum paket pada metadata yang ditulis pada /var/log/packages.
+.TP 
+\fB\-\-root /rootlain\fP
+Menginstall menggunakan lokasi selain / (default) sebagai root dari sistem
+berkas. Pada contoh yang diberikan, gunakan /rootlain. Mengatur variabel
+lingkungan ROOT menghasilkan hasil yang sama.
+.TP 
+\fB\-\-infobox\fP
+Menggunakan /bin/dialog untuk menampilkan informasi dialog saat paket
+diinstall. Digunakan ketika installpkg dipanggil dari script lain.
+.TP 
+\fB\-\-menu\fP
+Menggunakan /bin/dialog untuk menampilkan menu yang menanyakan pengguna
+apakah mereka hendak menginstall paket atau tidak. Biasanya digunakan ketika
+installpkg dipanggil dari script lain.
+.TP 
+\fB\-\-terse\fP
+Menginstall paket dengan menampilkan satu baris deskripsi pada stdout.
+.TP 
+\fB\-\-ask\fP
+Digunakan dengan mode \-menu. Ketika dipilih, selalu bertanya apakah paket
+harus diinstall tanpa melihat prioritas paket.
+.TP 
+\fB\-\-priority ADD|REC|OPT|SKP\fP
+Ketika menginstall menggunakan opsi \-menu, level prioritas paket (ditemukan
+pada file "tagfile" pada direktori paket) akan digunakan untuk secara
+otomatis menginstall (ADD) atau melewati (SKIP) paket, atau menawarkan (REC)
+atau opsional (OPT) pada pengguna jika menu ditampilkan. Jika prioritas
+ditentukan pada perintah baris, akan menimpa nilai yang ditentukan pada file
+tag untuk seluruh daftar paket.
+.TP 
+\fB\-\-tagfile /direktori/filetag\fP
+Menentukan file yang berbeda yang digunakan untuk prioritas paket (dalam
+contoh ini /direktori/filetag akan digunakan). Defaultnya adalah "tagfile"
+pada direktori paket.
+.SH CONTOH
+.TP 
+\fBmenginstall paket font untuk X:\fP
+.P
+installpkg font\-bh\-ttf\-1.0.3\-noarch\-1.txz
+.P
+Perhatikan jika paket sudah terinstall, sebaiknya menggunakan upgradepkg(8).
+.TP 
+\fBMembuat backup dari file yang akan ditimpa apabila paket terinstall:\fP
+.P
+.nf
+tar czvf /tmp/backup.tar.gz \e⏎
+$(installpkg \-\-warn font\-bh\-ttf\-1.0.3\-noarch\-1.txz)⏎
+.fi
+.SH PEMBUAT
+Patrick J. Volkerding <volkerdi@slackware.com>
+.SH "LIHAT JUGA"
+\fBmakepkg(8),\fP \fBremovepkg(8),\fP \fBexplodepkg(8),\fP \fBpkgtool(8),\fP
+\fBupgradepkg(8)\fP

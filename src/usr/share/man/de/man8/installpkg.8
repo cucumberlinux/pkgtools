@@ -1,0 +1,94 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH INSTALLPKG 8 "22. November 2001" "Slackware Version 8.1.0" 
+.SH NAME
+installpkg \- Installation von Slackware Paketen.
+.SH ZUSAMMENFASSUNG
+\fBinstallpkg\fP [ \fB\-\-warn\fP ] [ \fB\-\-md5sum\fP ] [ \fB\-\-root
+/alternatives_wurzelverzeichnis\fP ] [ \fB\-\-infobox\fP ] [ \fB\-\-menu\fP ] [
+\fB\-\-terse\fP ] [ \fB\-\-ask\fP ] [ \fB\-\-priority ADD|REC|OPT|SKP\fP ] [ \fB\-\-tagfile
+/verzeichnis/tag\-datei\fP ] \fBpaket\fP [ \fBpaket2 ...\fP ]
+.SH BESCHREIBUNG
+\fBinstallpkg\fP installiert ein oder mehrere *.tgz, .tbz, .tlz oder .txz
+Pakete für die Verwendung mit Slackware Linux.
+.SH OPTIONEN
+.TP 
+\fB\-\-warn paketname\fP
+Generiert eine Liste von Dateien, welche nach Standardausgabe ("standard
+output") überschrieben werden würden , überschreibt dabei aber kein aktuell
+installiertes Paket. Die Formatierung ist für die Nutzung von Listen für
+Sicherungen geeignet.
+.TP 
+\fB\-\-md5sum paketname\fP
+Notiert die MD5\-Prüfsumme in der Datei für Metadaten unter
+/var/log/packages.
+.TP 
+\fB\-\-root /alternatives_wurzelverzeichnis\fP
+Alternativer Installationspfad anstelle des / (Standard Wurzelverzeichnis)
+im Dateisystems. Am Beispiel /alternatives_wurzelverzeichnis. Parameter
+äquivalent zur ROOT\-Umgebungsvariable.
+.TP 
+\fB\-\-infobox\fP
+Verwenden Sie /bin/dialog um Informationen anzuzeigen, wenn das Paket
+installiert wurde. Hauptsächlich verwendet, wenn Installpkg von anderen
+Skripten ausgeführt wird.
+.TP 
+\fB\-\-menu\fP
+Verwenden Sie /bin/dialog zur Darstellung eines Menüs, zur Erfragung, ob das
+oder die Pakete installiert werden sollen.
+Hauptsächlich verwendet, wenn Installpkg von anderen Skripten ausgeführt
+wird.
+.TP 
+\fB\-\-terse\fP
+Installiert das Paket mit einzeiliger Rückmeldung in die Standardausgabe.
+.TP 
+\fB\-\-ask\fP
+In Verbindung mit \-menu. Wenn ausgewählt, erfrage immer, ob ein Paket
+unabhängig seiner Priorisierung installiert werden soll.
+.TP 
+\fB\-\-priority ADD|REC|OPT|SKP\fP
+In Verbindung mit \-menu, wird über die Priorität des Pakets (zu finden in
+der TAG\-Datei im Paketverzeichnis) automatisch ermittelt, ob eine
+Installation (ADD) oder ein Überspringen (SKP) angewendet wird, oder eine
+Empfehlung (REC) oder optional (OPT) vorgeschlagen wird. Wird die Priorität
+über die Kommandozeile angegeben, werden die Standardwerte aus der TAG\-Datei
+nicht berücksichtigt.
+.TP 
+\fB\-\-tagfile /einverzeichnis/tagfile\fP
+Geben Sie eine andere zu verwendende Datei für Paketprioritäten an (in
+diesem Beispiel wird /somedir/tagfile genutzt). Der Standard ist "tagfile"
+im Verzeichnis des Pakets.
+.SH BEISPIELE
+.TP 
+\fBInstalliert ein Schriftarten\-Paket für X:\fP
+.P
+installpkg font\-bh\-ttf\-1.0.3\-noarch\-1.txz
+.P
+Beachten Sie, dass für bereits installierte Pakete upgradepkg(8) verwendet
+werden sollte.
+.TP 
+\fBErstelle ein Backup der Datei, die überschrieben werden würde, wenn das Paket installiert ist:\fP
+.P
+.nf
+tar czvf /tmp/backup.tar.gz \e
+  $(installpkg \-\-warn font\-bh\-ttf\-1.0.3\-noarch\-1.txz)
+.fi
+.SH AUTOR
+Patrick J. Volkerding <volkerdi@slackware.com>
+.SH "SIEHE AUCH"
+\fBmakepkg(8),\fP \fBremovepkg(8),\fP \fBexplodepkg(8),\fP \fBpkgtool(8),\fP
+\fBupgradepkg(8)\fP

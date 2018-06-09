@@ -1,0 +1,95 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH INSTALLPKG 8 "22 Nov 2001" "Slackware Versie 8.1.0" 
+.SH NAAM
+installpkg \- Installeer Slackware pakketten
+.SH SYNOPSIS
+\fBinstallpkg\fP [ \fB\-\-warn\fP ] [ \fB\-\-md5sum\fP ] [ \fB\-\-root /andereroot\fP ] [
+\fB\-\-infobox\fP ] [ \fB\-\-menu\fP ] [ \fB\-\-terse\fP ] [ \fB\-\-ask\fP ] [ \fB\-\-priority
+ADD|REC|OPT|SKP\fP ] [ \fB\-\-tagfile /pad/naar/tagfile\fP ] \fBpakketnaam\fP [
+\fBpakketnaam2 ...\fP ]
+.SH BESCHRIJVING
+\fBinstallpkg\fP installeert een of meer *.tgz (of .tbz, .tlz, .txz) binaire
+pakketten ontworpen voor gebruik met Slackware Linux op je systeem.
+.SH OPTIES
+.TP 
+\fB\-\-warn pakketnaam\fP
+Genereer een lijst met bestanden die zouden worden overschreven naar de
+standaard uitvoer maar installeer het pakket niet. De lijst is in een
+formaat dat als een lijst van bestanden kan worden geback\-upt.
+.TP 
+\fB\-\-md5sum pakketnaam\fP
+Neem de md5sum van het pakket op in de metadata in /var/log/packages.
+.TP 
+\fB\-\-root /andereroot\fP
+Installeer op een andere locatie dan / (standaard) als de root van het
+bestandssysteem waarop geïnstalleerd wordt. In het voorbeeld wordt
+/andereroot gebruikt. Het instellen van de ROOT omgevingsvariabele doet
+hetzelfde.
+.TP 
+\fB\-\-infobox\fP
+Gebruik /bin/dialog om een informatieve dialoog weer te geven als het pakket
+wordt geïnstalleerd. Primair gebruikt wanneer installpkg wordt aangeroepen
+vanuit andere scripts.
+.TP 
+\fB\-\-menu\fP
+Gebruik /bin/dialog om een menu weer te geven dat de gebruiker vraagt de
+pakketten al dan niet te installeren. Over het algemeen gebruikt wanneer
+installpkg wordt aangeroepen vanuit andere scripts.
+.TP 
+\fB\-\-terse\fP
+Installeer het pakket en stuur een beschrijving van slechts een enkele regel
+naar standaard output.
+.TP 
+\fB\-\-ask\fP
+Wordt gebruikt in combinatie met \-menu mode. Indien geselecteerd vraagt het
+altijd of een pakket moet worden geïnstalleerd ongeacht de prioriteit van
+het pakket.
+.TP 
+\fB\-\-priority ADD|REC|OPT|SKP\fP
+Bij installatie met de \-menu optie, worden prioriteitsniveau's (gevonden in
+het bestand "tagfile" in de pakketdirectory) gebruikt om een pakket
+automatisch te installeren (ADD) of over te slaan (SKP), of om aanbevolen
+(REC) of optioneel (OPT) voor te stellen aan de gebruiker als een menu wordt
+weergegeven.Als een prioriteit op de commandoregel wordt opgegeven zal die
+worden gebruikt in plaats van de waarden in de tagfile voor de gehele
+pakkettenlijst.
+.TP 
+\fB\-\-tagfile /pad/naar/tagfile\fP
+Specificeer een ander bestand voor gebruik van pakketprioriteiten (in dit
+voorbeeld wordt /pad/naar/tagfile gebruikt). Standaard is dit "tagfile" in
+de pakketdirectory.
+.SH VOORBEELDEN
+.TP 
+\fBInstalleer een font\-pakket voor X:\fP
+.P
+installpkg font\-bh\-ttf\-1.0.3\-noarch\-1.txz
+.P
+Merk op dat als het pakket al is geïinstalleerd, upgradepkg(8) moet worden
+gebruikt.
+.TP 
+\fBMaak een backup van de bestanden die zouden worden overschreven bij installatie van het pakket\fP
+.P
+.nf
+tar czvf /tmp/backup.tar.gz \e
+  $(installpkg \-\-warn font\-bh\-ttf\-1.0.3\-noarch\-1.txz)
+.fi
+.SH AUTEUR
+Patrick J. Volkerding <volkerdi@slackware.com>
+.SH "ZIE OOK"
+\fBmakepkg(8),\fP \fBremovepkg(8),\fP \fBexplodepkg(8),\fP \fBpkgtool(8),\fP
+\fBupgradepkg(8)\fP

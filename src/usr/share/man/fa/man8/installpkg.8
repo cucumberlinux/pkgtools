@@ -1,0 +1,92 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH INSTALLPKG 8 "۲۲ نوامبر ۲۰۰۱" "اسلکور نسخه 8.1.0" 
+.SH نام
+؛ installpkg: نصاب پکیج های اسلکور ؛
+.SH اختصار
+\fBinstallpkg\fP [ \fB\-\-warn\fP ] [ \fB\-\-md5sum\fP ] [ \fB\-\-root /otherroot\fP ] [
+\fB\-\-infobox\fP ] [ \fB\-\-menu\fP ] [ \fB\-\-terse\fP ] [ \fB\-\-ask\fP ] [ \fB\-\-priority
+ADD|REC|OPT|SKP\fP ] [ \fB\-\-tagfile /somedir/tagfile\fP ] \fBpackagename\fP [
+\fBpackagename2 ...\fP ]
+.SH توصیف
+ابزار installpkg یک یا چند پکیج باینری اسلکور با فرمت های tgz ،tbz ،tlz و
+txz که برای استفاده در توزیع اسلکور لینوکس طراحی شده اند، روی سیستم شما نصب
+می کند.
+.SH "گزینه ها"
+.TP 
+\fB\-\-warn پکیج\fP
+لیستی از فایلهایی که جایگزین خروجی استاندارد (stdout) می شوند تهیه می کند
+اما پکیج را نصب نمی کند. این لیست در یک فرمت مناسب تهیه شده و به عنوان لیست
+فایلهای لازم برای پشتیبان گیری مورد استفاده قرار می گیرد.
+.TP 
+\fB\-\-md5sum پکیج\fP
+اطلاعات md5sum یک پکیج را در مسیر var/log/packages/ ثبت می کند.
+.TP 
+\fB\-\-root /otherroot\fP
+پکیج را در محلی غیر از محل پیش فرض (/) به عنوان ریشه فایل سیستم نصب می
+کند. در مثال ارائه شده از otherroot/ استفاده می شود. تنظیم متغیر محیطی ROOT
+عمل مشابهی انجام می دهد.
+.TP 
+\fB\-\-infobox\fP
+برای نمایش اطلاعات از bin/dialog/ به هنگام نصب پکیج استفاده شده و به ویژه به
+هنگام فراخوانی installpkg از اسکریپت های دیگر مورد استفاده قرار می گیرد.
+.TP 
+\fB\-\-menu\fP
+
+از bin/dialog/ برای نمایش پرسش از کاربر به منظور نصب پکیج استفاده می
+کند. این گزینه نیز معمولا به هنگام فراخوانی این ابزار از اسکریپت های دیگر
+استفاده می شود.
+.TP 
+\fB\-\-terse\fP
+پکیج را صرفا با نمایش یک توصیف یک خطی در خروجی استاندارد، نصب می کند.
+.TP 
+\fB\-\-ask\fP
+
+به همراه حالت منو (menu\-) استفاده شده و به هنگام انتخاب، بدون توجه به اولویت
+پکیج نصب آن را از کاربر سئوال می کند.
+.TP 
+\fB\-\-priority ADD|REC|OPT|SKP\fP
+به هنگام نصب با استفاده از گزینه منو (menu\-)، این گزینه از سطوح اهمیت پکیج
+ها (ارائه شده در فایل tagfile موجود در دایرکتوری پکیج) برای نصب (ADD)، عدم
+نصب اتوماتیک (SKP) یا پیشنهاد پکیج های توصیه شده (REC) یا انتخابی (OPT) (در
+صورت نمایش منو) استفاده می کند. اگر یک اولویت در خط فرمان تعیین شود جایگزین
+مقادیر مندرج در فایل tagfile برای لیست تمام پکیج ها خواهد شد.
+.TP 
+\fB\-\-tagfile /somedir/tagfile\fP
+فایل جایگزینی برای استفاده در اولویت بندی پکیج ها مشخص می کند (در این مثال
+از somedir/tagfile/ استفاده می شود). حالت پیش فرض، فایل tagfile موجود در
+دایرکتوری پکیج می باشد.
+.SH مثالها
+.TP 
+\fBنصب یک پکیج فونت برای X:\fP
+.P
+installpkg font\-bh\-ttf\-1.0.3\-noarch\-1.txz
+.P
+به خاطر داشته باشید که اگر یک پکیج قبلا نصب شده بود باید از upgradepkg
+استفاده شود.
+.TP 
+\fBساخت پشتیبان از فایلهایی که در صورت نصب یک پکیج جایگزین خواهند شد:\fP
+.P
+.nf
+tar czvf /tmp/backup.tar.gz \e
+  $(installpkg \-\-warn font\-bh\-ttf\-1.0.3\-noarch\-1.txz)
+.fi
+.SH نویسنده
+Patrick J. Volkerding <volkerdi@slackware.com>
+.SH "نگاه کنید به"
+\fBmakepkg(8),\fP \fBremovepkg(8),\fP \fBexplodepkg(8),\fP \fBpkgtool(8),\fP
+\fBupgradepkg(8)\fP

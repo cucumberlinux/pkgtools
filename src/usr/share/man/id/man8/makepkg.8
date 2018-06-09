@@ -1,0 +1,100 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MAKEPKG 8 "21 May 1994" "Slackware Versi 2.0.0" 
+.SH NAMA
+makepkg \- membuat paket Slackware.
+.SH SINOPSIS
+\fBmakepkg\fP [ \fB\-l, \-\-linkadd y|n\fP ] [ \fB\-c, \-\-chown y|n\fP ] \fBnamapaket\fP
+.SH DESKRIPSI
+\fBmakepkg\fP menghasilkan paket Slackware baru yang kompatibel. Paket dibentuk
+menggunakan isi dari direktori aktual dan semua sub direktori. Jika
+terdapat link simbolis, mereka akan dikonversi pada kode script untuk
+menghasilkan mereka ketika paket terinstall. Kode ini akan ditambahkan pada
+script installasi utama \fB( install/doinst.sh )\fP , atau, jika script
+tersebut tidak akan, maka akan dibuat dengan isi tersebut. Paket akan
+dituliskan pada file \fBnamapaket\fP yang seharusnya berisi nama lengkap,
+termasuk ekstensi. Biasanya .tgz, tetapi .tbz, .tlz, dan .txz juga
+diterima. Utilitas kompresi yang benar (gzip, bzip2, lzma, atau xz) harus
+diinstall pada mesin.
+.SH OPSI
+.TP 
+\fB\-l, \-\-linkadd y|n\fP
+Jika y, menambahkan link simbolis yang ditemukan pada script installasi
+(doinst.sh) dan menghapusnya. Ini adalah aksi yang direkomendasikan. Jika
+tidak digunakan, makepkg akan menanyakan jika ditemukan link simbolis.
+.TP 
+\fB\-p, \-\-prepend\fP
+Jika opsi ini diberikan, maka semua link simbolis ditambahkan pada doinst.sh
+akan ditambahkan pada script yang ada. Hal ini berguna untuk paket yang
+berisi pustaka yang dipakai bersama\-sama yang harus ditautkan terlebih
+dahulu karena program akan menggunakannya pada script doinst.sh.
+.TP 
+\fB\-c, \-\-chown y|n\fP
+Jika y, makepkg akan me\-reset semua hak akses direktori menjadi 755 dan
+kepemilikan menjadi root:root. Secara umum, Anda harus mengatur sendiri hak
+akses dan kepemilikan dengan sendirinya, sehingga menggantungkan pada opsi
+ini dengan y berarti ceroboh. Ini bukan default. Jika opsi tidak disediakan,
+makepkg akan menanyakan.
+.SH "SCRIPT INSTALLASI"
+Terdapat tiga jenis script installasi yang didukung pada sistem paket
+Slackware
+.TP 
+Pertama adalah
+Script installasi \fButama\fP . Ini ditemukan pada sub direktori \fB./install\fP
+dan harus memiliki name \fBdoinst.sh\fP agar dikenali. Script ini (dan script
+lainnya) harus ditulis menggunakan sintaks shell Bourne shell yang dikenali
+oleh shell \fBash\fP, karena merupakan shell yang digunakan untuk mengeksekusi
+script ketika menginstall dari disket Slackware. Ini merupakan jebakan umum
+\- hati\-hati menggunakan ekspresi sintaks \fBbash\fP, karena script akan bekerja
+dengan baik ketika diinstall dari hard drive, tetapi tidak dari disket. Jika
+paket untuk keperluan pribadi, maka bukanlah sebuah masalah. Hati\-hatilah,
+jika Anda berencana untuk membagikan paket Anda dengan pengguna lain.
+\fBscript installasi utama\fP dieksekusi segera setelah paket diinstall dengan
+\fBinstallpkg, pkgtool,\fP atau \fBsetup.\fP
+.TP 
+Jenis kedua dari script adalah
+Script \fBkonfigurasi\fP. Ini ditemukan pada sub direktori \fB./var/log/setup\fP
+dan harus memiliki nama yang diawali  \fBsetup.\fP agar bisa dikenali. Sebagai
+contoh adalah script zona waktu: \fB/var/log/setup/setup.timeconfig.\fP Script
+ini dieksekusi ketika \fBCONFIGURE\fP fase \fBsetup,\fP dan dieksekusi ulang
+setiap kali pengguna menjalankan  \fBCONFIGURE\fP opsi dari \fBsetup\fP. Biasanya,
+pengguna akan melalui fase setup setelah installasi dari semua paket. Semua
+yang perlu interaksi harus masuk pada salah satu script ini untuk mengindari
+penghentian proses installasi paket selama \fBsetup.\fP
+.TP 
+Jenis ketiga dari script adalah
+Script \fBonlyonce\fP. Seperti namanya, script ini hanya dijalankan satu kali
+setelah paket terinstall, berbeda dengan script standar
+\fBconfiguration\fP. Script ini juga ditemukan pada direktori
+\&\fB./var/log/setup\fP dan harus memiliki nama yang diawali dengan \fBsetup.,\fP
+tetapi juga harus berisi string \fBonlyonce.\fP Contohnya adalah script dengan
+nama   \fB/var/log/setup/setup.onlyonce.testscript\fP
+.SH "FORMAT PAKET"
+\fBmakepkg\fP menggunakan GNU tar ditambah GNU gzip untuk menghasilkan
+paketnya. Cara sederhana untuk meng\-ekstrak paket (tanpa menjalankan script
+installasi) adalah menggunakan perintah seperti berikut:
+.TP 
+explodepkg paket.tgz
+.TP 
+Atau, seperti ini:
+.TP 
+gzip \-dc paket.tgz | tar xvvf \-
+.SH PEMBUAT
+Patrick J. Volkerding <volkerdi@slackware.com>
+.SH "LIHAT JUGA"
+\fBinstallpkg(8),\fP \fBexplodepkg(8),\fP \fBremovepkg(8),\fP \fBpkgtool(8),\fP
+\fBupgradepkg(8)\fP

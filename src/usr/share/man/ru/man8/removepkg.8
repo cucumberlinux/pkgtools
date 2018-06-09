@@ -1,0 +1,82 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH REMOVEPKG 8 "23 ноября 2001" "Slackware версия 8.1.0" 
+.SH НАЗВАНИЕ
+\fBremovepkg\fP \- удаляет пакеты Slackware.
+.SH СИНТАКСИС
+\fBremovepkg\fP \fBимя_пакета\fP
+.LP
+[ \fBROOT=/mnt\fP ] \fBremovepkg\fP [ \fB\-copy\fP ] [ \fB\-keep\fP ] [ \fB\-preserve\fP ] [
+\fB\-warn\fP ] \fBимя_пакета\fP
+.SH ОПИСАНИЕ
+\fBremovepkg\fP удаляет ранее установленный пакет Slackware, при этом выводит
+отчет на стандартный вывод. Пакет может быть задан полным именем (как в
+/var/log/packages/), или по базовому имени пакета. Например, пакет
+foo\-1.0\-i486\-1.tgz можно удалить любой из следующих команд:
+
+removepkg foo\-1.0\-i486\-1.tgz (также распознаются .tbz, .tlz, .txz)
+
+removepkg foo\-1.0\-i486\-1
+
+removepkg foo.tgz
+
+removepkg foo
+
+При удалении файлов \fBremovepkg\fP анализирует содержимое других установленных
+в системе пакетов и удаляет только те файлы, которые для удаляемого пакета
+уникальны. Аналогично, при принятии решения, удалять или нет символические
+ссылки, будут учитываться установочные сценарии всех остальных пакетов.
+.LP
+Удаление пакета (как и его установка) может быть опасным мероприятием. По
+этой причине доступен параметр \fB\-warn\fP. При его указании, \fBremovepkg\fP
+вместо удаления файлов и ссылок выведет подробный отчет о том, что будет
+сделано при удалении пакета. Предполагается, что перед удалением пакета вы
+этой возможностью воспользовались (возможно, передав вывод в \fBless\fP) и
+сделали резервные копии всех важных данных.
+.LP
+При удалении пакета его индексный файл будет перемещен из /var/log/packages
+в /var/log/removed_packages. Аналогично, его установочный сценарий будет
+перемещен из /var/log/scripts в /var/log/removed_scripts.
+.SH ПАРАМЕТРЫ
+.TP 
+\fB\-warn имя_пакета\fP
+Сформировать и вывести на стандартный вывод отчет о том, какие файлы и
+каталоги будут удалены, но само удаление не выполнять.
+.TP 
+\fB\-preserve имя_пакета\fP
+Если указан, полное поддерево пакета реконструируется в
+/var/log/setup/tmp/preserved_packages/packagename.
+.TP 
+\fB\-copy имя_пакета\fP
+Создать копию пакета в /var/log/setup/tmp/preserved_packages/имя_пакета, но
+не удалять его (эквивалентно \-warn \-preserve).
+.TP 
+\fB\-keep\fP
+Сохранить промежуточные файлы, созданные \fBremovepkg\fP (delete_list,
+required_files, uniq_list, del_link_list, required_links,
+required_list). Весьма полезно для отладки.
+.SH " "
+Для удаления пакета с файловой системы, отличной от /, можно задать
+\fBremovepkg\fP переменную окружения \fBROOT\fP:
+.TP 
+\fBROOT=/mnt removepkg пакет\fP
+
+.SH АВТОРЫ
+Patrick J. Volkerding <volkerdi@slackware.com>, с дополнениями от
+Christian Franke <c.franke@acm.org>
+.SH "СМОТРИТЕ ТАКЖЕ"
+\fBinstallpkg(8),\fP \fBmakepkg(8),\fP \fBpkgtool(8),\fP \fBupgradepkg(8)\fP

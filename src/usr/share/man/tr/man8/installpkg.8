@@ -1,0 +1,91 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH INSTALLPKG 8 "22 Kasım 2001" "Slackware Versiyon 8.1.0" 
+.SH İSİM
+installpkg \- Slackware paketlerini kur.
+.SH ÖZET
+\fBinstallpkg\fP [ \fB\-\-warn\fP ] [ \fB\-\-md5sum\fP ] [ \fB\-\-root /otherroot\fP ] [
+\fB\-\-infobox\fP ] [ \fB\-\-menu\fP ] [ \fB\-\-terse\fP ] [ \fB\-\-ask\fP ] [ \fB\-\-priority
+ADD|REC|OPT|SKP\fP ] [ \fB\-\-tagfile /somedir/tagfile\fP ] \fBpaketadı\fP [
+\fBpaketadı2 ...\fP ]
+.SH AÇIKLAMA
+\fBinstallpkg\fP sisteminiz üzerine Slackware Linux dağıtımı ile kullanılması
+için tasarlanmış tekil veya çoklu *.tgz (ya da .tbz, .tlz,, txz) ikili
+paketlerini kurar.
+.SH OPSİYONLAR
+.TP 
+\fB\-\-warn paketadı\fP
+Standart çıktının üzerine yazacak bir dosya listesi üretir fakat pakaeti
+gerçekten kurmaz. Liste, yedeklenecek dosyaların listesi olarak kullanılacak
+uygun bir biçimde biçimlendirilmiştir.
+.TP 
+\fB\-\-md5sum paketadı\fP
+Paket md5sum değerini /var/log/packages dizindeki metadata içine kaydet.
+.TP 
+\fB\-\-root /diğerkök\fP
+/ (varsayılan) kurulacak dosya sisteminin kökü olduğundan bunun dışında bir
+yeri kullanarak kurun.  Verilen örnekte, bunun yerine /diğerkök
+kullanın. ROOT ortam değişkenini ayarlamak aynı işi görür.
+.TP 
+\fB\-\-infobox\fP
+Paketin kurulu olduğu bilgisi gibi bir bilgi dialogunu görüntülemek için
+/bin/dialog kullanın. İlk olarak installpkg diğer betiklerden çağırıldığında
+kullanılır.
+.TP 
+\fB\-\-menu\fP
+Kullanıcıya paket(ler)in kurulup kurulmayacağını soran bir menü görüntülemek
+için /bin/dialog kullanın. Genellikle installpkg diğer betiklerden
+çağırıldığında kullanılır.
+.TP 
+\fB\-\-terse\fP
+stdout'a sadece tek bir tanım bilgisi gösteren paketi kurun.
+.TP 
+\fB\-\-ask\fP
+\-menu modundan kullanılır. Seçili olduğunda, daima paketin önceliğine
+bakılmaksızın paketin kurulmasının gerekip gerekmediğini sorar.
+.TP 
+\fB\-\-priority ADD|REC|OPT|SKP\fP
+\-menu seçeneği ile kurarken, paket önceliği seviyeleri (paket dizini içinde
+"tagfile"da bulunur) otomatik olarak kurmak (ADD) veya vazgeçmek (SKP), veya
+tavsiye edileni önermek için (REC) veya menü gösterimi kullanıcıya
+seçebileceği (OPT) şekilde olması için kullanılır. Eğer bir öncelik komut
+satırından ayarlanırsa, bu tagfile içindeki ayarın tüm paket listesi için
+üzerine yazacaktır.
+.TP 
+\fB\-\-tagfile /somedir/tagfile\fP
+Paket önceliklerini kullanmak için başka bir dosya belirtin (bu örnekte
+/herhangibirdizin/tagfile kullanılacak). Varsayılan paket dizini içindeki
+"tagfile"dır.
+.SH ÖRNEKLER
+.TP 
+\fBYazı fontunu buraya yükleyin X:\fP
+.P
+installpkg font\-bh\-ttf\-1.0.3\-noarch\-1.txz
+.P
+Bir paket zaten yüklüyse, onun yerine upgradepkg (8) kullanılmalıdır.
+.TP 
+\fBCreate a backup of the files that would be overwritten if the package is installed:\fP
+.P
+.nf
+tar czvf /tmp/backup.tar.gz \e
+  $(installpkg \-\-warn font\-bh\-ttf\-1.0.3\-noarch\-1.txz)
+.fi
+.SH YAZAR
+Patrick J. Volkerding <volkerdi@slackware.com>
+.SH "BİR BAKIN"
+\fBmakepkg(8),\fP \fBremovepkg(8),\fP \fBexplodepkg(8),\fP \fBpkgtool(8),\fP
+\fBupgradepkg(8)\fP

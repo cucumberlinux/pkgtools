@@ -1,0 +1,87 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH REMOVEPKG 8 "23 Nov 2001" "Slackware Versie 8.1.0" 
+.SH NAAM
+removepkg \- Verwijder Slackware pakketten.
+.SH SYNOPSIS
+\fBremovepkg\fP \fBpakketnaam\fP
+.LP
+[ \fBROOT=/mnt\fP ] \fBremovepkg\fP [ \fB\-copy\fP ] [ \fB\-keep\fP ] [ \fB\-preserve\fP ] [
+\fB\-warn\fP ] \fBpakketnaam\fP
+.SH BESCHRIJVING
+\fBremovepkg\fP verwijdert een reeds geïnstalleerd Slackware pakket waarbij een
+voortgangsrapport naar de standard uitvoer wordt gestuurd. Een pakket kan
+worden aangegeven door de volledige pakketnaam (zoals weergegeven in
+/var/log/packages/), of door de basispakketnaam.Het pakket
+foo\-1.0\-i486\-1.tgz kan bijvoorbeeld worden verwijderd met elk van de
+volgende opdrachten:
+
+removepkg foo\-1.0\-i486\-1.tgz (ook herkend: .tbz, .tlz, .txz)
+
+removepkg foo\-1.0\-i486\-1
+
+removepkg foo.tgz
+
+removepkg foo
+
+Bij het verwijderen van bestanden zal \fBremovepkg\fP de inhoud van andere op
+je systeem geïnstalleerde pakketten analyseren en alleen die bestanden
+verwijderen die uniek zijn voor het pakket. Tevens worden de
+installatie\-scripts van alle andere pakketten in aanmerking genomen bij het
+besluit al of niet symbolische links van het pakket te verwijderen.
+.LP
+Het verwijderen van een pakket kan (net als het installeren) een gevaarlijke
+onderneming zijn. Daarom is de \fB\-warn\fP optie beschikbaar. Als je deze
+gebruikt zal \fBremovepkg\fP niet daadwerkelijk bestanden of links verwijderen
+maar zal een gedetailleerd rapport geven van wat het zou doen als het pakket
+daadwerkelijk verwijderd wordt. Dit wordt aanbevolen (en misschien via het
+pipe commando naar \fBless\fP) voordat je pakketten verwijdert om er zeker van
+te zijn dat je een backup hebt van belangrijke zaken.
+.LP
+Als een pakket wordt verwijderd wordt zijn originele bestandsindex
+verplaatst van /var/log/packages naar /var/log/removed_packages en zijn
+installatiescript van /var/log/scripts naar /var/log/removed_scripts.
+.SH OPTIES
+.TP 
+\fB\-warn pakketnaam\fP
+Genereer een rapport naar de standaard uitvoer over welke bestanden zouden
+worden verwijderd, maar verwijdert het pakket niet daadwerkelijk.
+.TP 
+\fB\-preserve pakketnaam\fP
+Indien aangegeven wordt de gehele boomstructuur van het pakket
+gereconstrueerd in /var/log/setup/tmp/preserved_packages/pakketnaam.
+.TP 
+\fB\-copy pakketnaam\fP
+Construeer een kopie van het pakket onder
+/var/log/setup/preserved_packages/pakketnaam maar verwijder dit
+niet. (hetzelfde effect als \-warn \-preserve)
+.TP 
+\fB\-keep\fP
+Bewaar de tijdelijke bestanden gemaakt door removepkg (delete_list,
+required_files, uniq_list, del_link_list, required_links,
+required_list). Meestal nuttig voor opsporing van fouten.
+.SH " "
+Het is mogelijk een pakket te verwijderen van een bestandssysteem anders dan
+/ door bij \fBremovepkg\fP een \fBROOT\fP omgevingsvariabele mee te geven:
+.TP 
+\fBROOT=/mnt removepkg pakket\fP
+
+.SH AUTEURS
+Patrick J. Volkerding <volkerdi@slackware.com>, met verbeteringen
+door Christian Franke <c.franke@acm.org>
+.SH "ZIE OOK"
+\fBinstallpkg(8),\fP \fBmakepkg(8),\fP \fBpkgtool(8),\fP \fBupgradepkg(8)\fP

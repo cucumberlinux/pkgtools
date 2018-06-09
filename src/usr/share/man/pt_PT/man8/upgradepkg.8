@@ -1,0 +1,73 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH UPGRADEPKG 8 "31 Maio 2002" "Versão Slackware 8.1.0" 
+.SH NOME
+upgradepkg \- atualiza pacotes do Slackware.
+.SH SINOPSE
+\fBupgradepkg\fP [ \fB\-\-dry\-run\fP ] [ \fB\-\-install\-new\fP ] [ \fB\-\-reinstall\fP ] [
+\fB\-\-verbose\fP ] \fBnovonomedopacote\fP \fB[\fP\fInovonomedopacote2\fP\fB]\fP
+.LP
+\fBupgradepkg\fP [ \fB\-\-dry\-run\fP ] [ \fB\-\-install\-new\fP ] [ \fB\-\-reinstall\fP ] [
+\fB\-\-verbose\fP ] \fBnomedopacoteantigo%novonomedopacote\fP
+\fB[\fP\fIantigo2%novo2\fP\fB]\fP
+.SH DESCRIÇÃO
+\fBupgradepkg\fP atualiza um pacote Slackware a partir de uma versão mais
+antiga para uma versão mais recente. Ele faz isto \fBINSTALANDO\fP o novo
+pacote no sistema, e depois \fBREMOVENDO\fP todos os ficheiros do pacote antigo
+que não estão no novo pacote. Se os pacotes, antigo e novo têm o mesmo nome,
+um único argumento é tudo o que é necessário. Se os pacotes têm nomes
+diferentes, forneça o nome do antigo empacotamento, seguido por um símbolo
+de percentagem (%), então o nome do novo pacote. Não adicione qualquer
+espaço em branco extra entre pares de nomes de pacotes antigo/novo.
+
+Se o upgradepkg encontra mais de um pacote instalado correspondente ao nome
+do antigo pacote, ele irá remover todos eles.
+.TP 
+Para atualizar num diretório diferente do / (tal como /mnt):
+.TP 
+ROOT=/mnt upgradepkg package.tgz (ou .tbz, .tlz, .txz)
+.SH OPÇÕES
+.TP 
+\fB\-\-dry\-run\fP
+Produza um relatório sobre quais pacotes serão instalados ou atualizados,
+mas na verdade não realiza as atualizações.
+.TP 
+\fB\-\-install\-new\fP
+Normalmente o upgradepkg apenas atualiza pacotes que já estão instalados no
+sistema, e ignora quaisquer pacotes que ainda não possua uma versão
+instalada. Se \fB\-\-install\-new\fP for especificado, o comportamento é
+modificado para instalar novos pacotes além de atualizar os já existentes.
+.TP 
+\fB\-\-reinstall\fP
+Upgradepkg geralmente ignora os pacotes se o mesmo pacote exato (nome
+correspondente, versão, arquitetura, e número de compilação) já está
+instalado no sistema. Use a opção \-\-reinstall se você quiser atualizar todos
+os pacotes, mesmo se a mesma versão já estiver instalada.
+.TP 
+\fB\-\-verbose\fP
+Mostrar todos os detalhes da atualização.
+.SH PROBLEMAS
+Antes de atualizar um pacote, salve os ficheiros de configuração (como em
+/etc) que você deseja manter. Às vezes, estes serão preservados, mas isso
+depende da estrutura do pacote. Se você quiser forçar novas versões dos
+ficheiros de configuração para serem instalados, remova as antigas
+manualmente antes de executar upgradepkg.
+.SH AUTOR
+Patrick J. Volkerding <volkerdi@slackware.com>
+.SH "VER TAMBÉM"
+\fBmakepkg(8),\fP \fBinstallpkg(8),\fP \fBremovepkg(8),\fP \fBexplodepkg(8),\fP
+\fBpkgtool(8)\fP

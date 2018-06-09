@@ -1,0 +1,37 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH EXPLODEPKG 8 "21 Μαΐου 1994" "Slackware Version 2.0.0" 
+.SH ΟΝΟΜΑ
+explodepkg \- Εξαγωγή των περιεχομένων ενός συμπιεσμένου πακέτου tar (όπως τα
+πακέτα λογισμικού του Slackware) στον τρέχοντα κατάλογο.
+.SH ΣΥΝΟΨΗ
+\fBexplodepkg\fP \fBπακέτο\fP \fB[\fP \fBπακέτο2,\fP \fBπακέτο3,\fP \fB...\fP \fB]\fP
+.SH ΠΕΡΙΓΡΑΦΗ
+Το \fBexplodepkg\fP αποσυμπιέζει και εξάγει πακέτα Slackware *.tgz (or .tbz,
+\&.tlz, .txz) (ή όποιαδήποτε αρχεία έχουν δημιουργηθεί με την συμπίεση ενός
+αρχείου tar, χρησιμοποιώντας μιας από τις υποστηριζόμενες μεθόδους
+συμπίεσης) στον τρέχοντα κατάλογο.  Δεν χρησιμοποιείται συνήθως για την
+εγκατάσταση πακέτων, αφού δεν εκτελεί τα σενάρια εγκατάστασης στο ./install
+ή στο ./var/log/setup. Η κύρια χρήστη του \fBexplodepkg\fP είναι η συντήρηση
+πακέτων \- εξάγοντας τα περιεχόμενα ενός πακέτου σε ένα κατάλογο,
+πραγματοποιώντας τις όποιες διορθώσεις ή αναβαθμίζοντας το λογισμικό και στη
+συνέχεια δημιουργώντας ένα νέο πακέτο με τη χρήση του \fBmakepkg.\fP
+.SH ΣΥΓΓΡΑΦΕΑΣ
+Patrick J. Volkerding <volkerdi@slackware.com>
+.SH "ΒΛΕΠΕ ΕΠΙΣΗΣ"
+\fBtar(1),\fP \fBgzip(1),\fP \fBinstallpkg(8),\fP \fBmakepkg(8),\fP \fBpkgtool(8),\fP
+\fBupgradepkg(8)\fP

@@ -1,0 +1,36 @@
+.\" empty
+.ds g 
+.\" -*- nroff -*-
+.\" empty
+.ds G 
+.de  Tp
+.ie \\n(.$=0:((0\\$1)*2u>(\\n(.lu-\\n(.iu)) .TP
+.el .TP "\\$1"
+..
+.\" Like TP, but if specified indent is more than half
+.\" the current line-length - indent, use the default indent.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH EXPLODEPKG 8 "21 травня 1994" "Версія Slackware 2.0.0" 
+.SH ІМ'Я
+explodepkg \- видобуває стиснутий програмою tar контент (якими є пакети
+програм Slackware) до поточної директорії.
+.SH Перегляд
+\fBexplodepkg\fP \fBpackage\fP \fB[\fP \fBpackage2,\fP \fBpackage3,\fP \fB...\fP \fB]\fP
+.SH ОПИС
+\fBexplodepkg\fP розпаковує пакунки Slackware  *.tgz (або .tbz, .tlz, .txz)
+(або будь\-які інші архіви, які було створено стисненням архіву tar одною з
+підтримуваних утиліт стиснення) у поточний каталог. Це зазвичай не
+використовується для встановлення пакунків, оскільки при цьому не
+виконуються сценарії встановлення у ./install або у ./var/log/setup. Основне
+призначення \fBexplodepkg\fP у обслуговуванні пакунків \- витягування пакунку у
+підкаталог для внесення виправлень або оновлення програмного забезпечення й
+потім для збірки оновленого пакунку за допомогою \fBmakepkg\fP.
+.SH АВТОР
+Patrick J. Volkerding <volkerdi@slackware.com>
+.SH "ДИВИСЬ ТАКОЖ"
+\fBtar(1),\fP \fBgzip(1),\fP \fBinstallpkg(8),\fP \fBmakepkg(8),\fP \fBpkgtool(8),\fP
+\fBupgradepkg(8)\fP
